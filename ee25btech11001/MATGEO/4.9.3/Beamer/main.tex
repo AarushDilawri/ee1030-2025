@@ -1,0 +1,85 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{txfonts}
+\usepackage{tkz-euclide}
+\usepackage{listings}
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{gvv}
+\usepackage{lmodern}
+\usepackage{circuitikz}
+\usepackage{tikz}
+\usepackage{graphicx}
+
+\setbeamertemplate{page number in head/foot}[totalframenumber]
+
+\title{4.9.3}
+\date{\today}
+\author{EE25BTECH11001 - Aarush Dilawri}
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\begin{frame}{Question}
+\textbf{Question}:\\
+Find the equations of the two lines passing through the origin which intersect the line 
+\[
+\frac{x-3}{2} = \frac{y-3}{1} = \frac{z}{1}
+\]
+at angles of $\tfrac{\pi}{3}$ each.
+\end{frame}
+
+\begin{frame}{Solution}
+The given line can be expressed as
+\begin{align}
+    \vec{x} &= \vec{h} + \kappa\vec{m}\\
+    \text{where}\quad \vec{h} &= \myvec{3\\3\\0}, \quad \vec{m} = \myvec{2\\1\\1}
+\end{align}
+Any point $\vec{P}$ on this line can be given as 
+\begin{align}
+    \vec{P} = \vec{h} + \kappa\vec{m}
+\end{align}
+The line through the origin and $\vec{P}$ will have direction vector $\vec{P}$.
+\end{frame}
+
+\begin{frame}{Solution}
+Since the angle between $\vec{m}$ and $\vec{P}$ is $\tfrac{\pi}{3}$,
+\begin{align}
+\cos \theta &= \frac{\vec{m}^\top \vec{P}}{\|\vec{m}\| \,\|\vec{P}\|} \\
+\implies \left( \vec{m}^\top \vec{P} \right)^2 &= \cos^2\theta\,(\vec{m}^\top\vec{m})(\vec{P}^\top\vec{P}).
+\end{align}
+Substituting $\vec{P} = \vec{h} + \kappa\vec{m}$ and solving, we get
+\begin{align}
+    27\kappa^2 + 81\kappa + 54 = 0\\
+    \kappa^2 + 3\kappa + 2 =0\\
+    \implies \kappa = -1,-2
+\end{align}
+\end{frame}
+
+\begin{frame}{Solution}
+Therefore, the direction vectors of the lines are
+\begin{align}
+    \myvec{1\\2\\-1} \quad \text{and} \quad \myvec{-1\\1\\-2}
+\end{align}
+Thus, the equations of the lines are
+\begin{align}
+    \vec{x} = \lambda\myvec{1\\2\\-1} \quad \text{and} \quad 
+    \vec{x} = \mu\myvec{-1\\1\\-2}
+\end{align}
+\end{frame}
+\begin{frame}{Figure}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[height=0.5\textheight, keepaspectratio]{figs/fig.png}
+\end{figure}
+\end{frame}
+
+
+\end{document}

@@ -1,0 +1,111 @@
+\let\negmedspace\undefined
+\let\negthickspace\undefined
+\documentclass[journal]{IEEEtran}
+\usepackage[a5paper, margin=10mm, onecolumn]{geometry}
+%\usepackage{lmodern} % Ensure lmodern is loaded for pdflatex
+\usepackage{tfrupee} % Include tfrupee package
+
+\setlength{\headheight}{1cm} % Set the height of the header box
+\setlength{\headsep}{0mm}     % Set the distance between the header box and the top of the text
+
+\usepackage{gvv-book}
+\usepackage{gvv}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{txfonts}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{gensymb}
+\usepackage{comment}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{tkz-euclide} 
+\usepackage{listings}
+% \usepackage{gvv}                                        
+\def\inputGnumericTable{}                                 
+\usepackage[latin1]{inputenc}                                
+\usepackage{color}                                            
+\usepackage{array}                                            
+\usepackage{longtable}                                       
+\usepackage{calc}                                             
+\usepackage{multirow}                                         
+\usepackage{hhline}                                           
+\usepackage{ifthen}                                           
+\usepackage{lscape}
+\usepackage{circuitikz}
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=4em, text centered, rounded corners, minimum height=3em]
+\tikzstyle{sum} = [draw, fill=blue!10, circle, minimum size=1cm, node distance=1.5cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+
+
+\begin{document}
+
+\bibliographystyle{IEEEtran}
+\vspace{3cm}
+
+\title{4.3.37}
+\author{EE25BTECH11001 - Aarush Dilawri}
+\maketitle
+% \newpage
+% \bigskip
+{\let\newpage\relax\maketitle}
+
+\renewcommand{\thefigure}{\theenumi}
+\renewcommand{\thetable}{\theenumi}
+\setlength{\intextsep}{10pt} % Space between text and floats
+
+
+\numberwithin{equation}{enumi}
+\numberwithin{figure}{enumi}
+\renewcommand{\thetable}{\theenumi}
+
+\textbf{Question}:\\
+Find the equations of the two lines passing through the origin which intersect the line $\frac{x-3}{2} = \frac{y-3}{1} = \frac{z}{1}$ at angles of $\frac{\pi}{3}$ each.
+
+\solution \\
+The given line can be expressed as
+\begin{align}
+    \vec{x} = \vec{h} + \kappa\vec{m}\\
+    \text{where}\quad \vec{h} = \myvec{3\\3\\0}\quad \text{and} \quad\vec{m} = \myvec{2\\1\\1}
+\end{align}
+Any point $\vec{P}$ on this line can be given as 
+\begin{align}
+    \vec{P} = \vec{h} + \kappa\vec{m}
+\end{align}
+The line through the origin and $\vec{P}$ will have direction vector $\vec{P}$.\\\\
+Since the angle between $\vec{m}$ and $\vec{P}$ is $\tfrac{\pi}{3}$,
+\begin{align}
+\cos \theta &= \frac{\vec{m}^\top \vec{P}}{\|\vec{m}\| \,\|\vec{P}\|} \\
+\implies \left( \vec{m}^\top \vec{P} \right)^2 &= \cos^2\theta\,(\vec{m}^\top\vec{m})(\vec{P}^\top\vec{P}).
+\end{align}
+Substituting $\vec{P} = \vec{h} + \kappa\vec{m}$ and solving, we get a quadratic equation in $\kappa$
+\begin{align}
+    \kappa^2\brak{\vec{m}^\top\vec{m}}^2\sin^2\theta + 2\kappa\brak{\vec{m}^\top\vec{m}}\brak{\vec{m}^\top\vec{h}}\sin^2\theta + \brak{\vec{m}^\top\vec{h}}^2 - \vec{m}^\top\vec{m}\cos^2\theta\vec{h}^\top\vec{h} = 0
+\end{align}
+Plugging in the values,
+\begin{align}
+    27\kappa^2 + 81\kappa + 54 = 0\\
+    \kappa^2 + 3\kappa + 2 =0\\
+    \implies \kappa = -1,-2
+\end{align}
+Therefore, the direction vectors of the lines are
+\begin{align}
+    \vec{x} = \myvec{3\\3\\0}-\myvec{2\\1\\1}=\myvec{1\\2\\-1} \quad \text{and} \quad \vec{x} = \myvec{3\\3\\0}-2\myvec{2\\1\\1}=\myvec{-1\\1\\-2}
+\end{align}
+Therefore, the equations of the lines are
+\begin{align}
+    \vec{x} = \lambda\myvec{1\\2\\-1} \quad \text{and} \quad \vec{x} = \mu\myvec{-1\\1\\-2}
+\end{align}
+See Figure,
+\begin{figure}[h!]
+    \centering
+    \includegraphics[height=0.5\textheight, keepaspectratio]{figs/fig.png}
+    %\caption{Direction and Normal Vectors}
+\end{figure}
+\end{document}
