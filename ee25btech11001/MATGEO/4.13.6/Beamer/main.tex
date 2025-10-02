@@ -1,0 +1,311 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{txfonts}
+\usepackage{tkz-euclide}
+\usepackage{listings}
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{gvv}
+\usepackage{lmodern}
+\usepackage{circuitikz}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{mathtools} 
+\setbeamertemplate{page number in head/foot}[totalframenumber]
+
+\title{4.13.6}
+\date{\today}
+\author{EE25BTECH11001 - Aarush Dilawri}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Problem Statement}
+\textbf{Question}:\\
+Given the points $\vec{A} \brak{0,4}$ and $\vec{B} \brak{0,-4}$, the equation of the locus of the point $\vec{p}\brak{x,y}$, such that $\lvert AP -BP \rvert = 6$
+\end{frame}
+
+\begin{frame}{Step 1: Define Vectors}
+\begin{align}
+    \vec{A},\,\vec{B},\,\vec{P} &\in \mathbb{R}^n
+\end{align}
+
+Let the given scalar be $ \delta \ge 0 $ and choose the sign $s\in\{+1,-1\}$ so that
+\begin{align}
+    r_1 - r_2 &= s\,\delta,
+\end{align}
+where $r_1=\|\vec{P}-\vec{A}\|$ and $r_2=\|\vec{P}-\vec{B}\|$.
+\end{frame}
+
+\begin{frame}{Step 2: Difference Vector}
+Define the difference vector
+\begin{align}
+    \vec{u} &= \vec{A}-\vec{B},
+\end{align}
+and the shorthand
+\begin{align}
+    D &= s\,\delta, \qquad
+    \alpha \;=\; \vec{A}^\top\vec{A} - \vec{B}^\top\vec{B}.
+\end{align}
+\end{frame}
+
+\begin{frame}{Step 3: Difference of Squares}
+\begin{align}
+    \|\vec{P}-\vec{A}\|^2 - \|\vec{P}-\vec{B}\|^2
+    &= (\vec{P}-\vec{A})^\top(\vec{P}-\vec{A}) - (\vec{P}-\vec{B})^\top(\vec{P}-\vec{B}) \\
+    &= -2\,\vec{P}^\top\vec{u} + \vec{A}^\top\vec{A} - \vec{B}^\top\vec{B}
+    \;=\; -2\,\vec{P}^\top\vec{u} + \alpha .
+\end{align}
+\end{frame}
+
+\begin{frame}{Step 4: Using $r_1^2 - r_2^2$ Identity}
+Use $(r_1-r_2)(r_1+r_2)=r_1^2-r_2^2$ and $r_1-r_2 = D$ to get
+\begin{align}
+    D\,(r_1+r_2) &= -2\,\vec{P}^\top\vec{u} + \alpha
+    \quad\Longrightarrow\quad
+    r_1+r_2 \;=\; \frac{-2\,\vec{P}^\top\vec{u} + \alpha}{D}.
+\end{align}
+
+Hence
+\begin{align}
+    r_1 &= \frac{(r_1-r_2)+(r_1+r_2)}{2}
+        \;=\; \frac{D}{2} \;+\; \frac{\alpha}{2D} \;-\; \frac{\vec{P}^\top\vec{u}}{D}.
+\end{align}
+\end{frame}
+
+\begin{frame}{Step 5: Quadratic Form}
+Square this expression and equate to the explicit quadratic form for $r_1^2$:
+\begin{align}
+    \left(\frac{D}{2} + \frac{\alpha}{2D} - \frac{\vec{P}^\top\vec{u}}{D}\right)^2
+    &= (\vec{P}-\vec{A})^\top(\vec{P}-\vec{A})
+    \;=\; \vec{P}^\top\vec{P} - 2\,\vec{P}^\top\vec{A} + \vec{A}^\top\vec{A}.
+\end{align}
+
+Multiply both sides by $D^2$ and simplify to get the general quadratic (conic) equation:
+\begin{align}
+    \vec{P}^\top\big(\vec{u}\vec{u}^\top - D^2 I\big)\vec{P}
+    \;+\;
+    \big(-(D^2+\alpha)\,\vec{u} + 2D^2\,\vec{A}\big)^\top \vec{P}
+    \;+\;
+    \frac{(D^2+\alpha)^2}{4} - D^2\,\vec{A}^\top\vec{A}
+    \;=\; 0.
+\end{align}
+\end{frame}
+
+\begin{frame}{Step 6: Substitute Values}
+Substitute $\vec{A}=\myvec{0\\4}$, $\vec{B}=\myvec{0\\-4}$ and $\delta=6$.
+\begin{align}
+    \vec{u} &= \vec{A}-\vec{B} = \myvec{0\\8} \\
+    \alpha &= \vec{A}^\top\vec{A} - \vec{B}^\top\vec{B} = 16 - 16 = 0 \\
+    D &= s\,\delta = \pm 6 \quad\Rightarrow\quad D^2 = 36
+\end{align}
+\end{frame}
+
+\begin{frame}{Step 7: Quadratic Matrix Equation}
+\begin{align}
+    \vec{P}^\top\big(\vec{u}\vec{u}^\top - 36I\big)\vec{P}
+    + \big(-D^2\vec{u} + 2D^2\vec{A}\big)^\top \vec{P}
+    + \frac{D^4}{4} - 36\vec{A}^\top\vec{A} &= 0
+\end{align}
+
+Compute each term:
+\begin{align}
+    \vec{u}\vec{u}^\top &= \myvec{0 & 0 \\ 0 & 64}, \qquad
+    I = \myvec{1 & 0 \\ 0 & 1} \\
+    \vec{u}\vec{u}^\top - 36I &= \myvec{-36 & 0 \\ 0 & 28}
+\end{align}
+\end{frame}
+
+\begin{frame}{Step 8: Linear and Constant Terms}
+Linear coefficient:
+\begin{align}
+    -D^2\vec{u} + 2D^2\vec{A} &= -36\myvec{0\\8} + 72\myvec{0\\4} = \myvec{0\\0}
+\end{align}
+
+Constant term:
+\begin{align}
+    \frac{D^4}{4} - 36\vec{A}^\top\vec{A} = 324 - 576 = -252
+\end{align}
+\end{frame}
+
+\begin{frame}{Step 9: Locus Equation}
+The locus is
+\begin{align}
+    \vec{P}^\top\myvec{-36 & 0 \\ 0 & 28}\vec{P} - 252 &= 0
+    \quad\Longrightarrow\quad
+    -36x^2 + 28y^2 = 252
+\end{align}
+
+Dividing through:
+\begin{align}
+    \frac{y^2}{9} - \frac{x^2}{7} &= 1
+\end{align}
+
+Thus, the locus is a hyperbola centered at the origin:
+\begin{align}
+    \frac{y^2}{9} - \frac{x^2}{7} = 1
+\end{align}
+\end{frame}
+\begin{frame}{Figure}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[height=0.5\textheight, keepaspectratio]{figs/fig.png}
+    \label{figure_1}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{C Code (code.c)}
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+#include <math.h>
+double inner_product(int n, double *u, double *v) {
+    double sum = 0.0;
+    for(int i=0; i<n; i++) {
+        sum += u[i]*v[i];
+    }
+    return sum;
+}
+double locus_value(int n, double *A, double *B, double *P, double D) {
+    // Compute u = A - B
+    double u[10];  // assume dimension <= 10 for simplicity
+    for(int i=0; i<n; i++) {
+        u[i] = A[i] - B[i];
+    }
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{C Code (code.c)}
+\begin{lstlisting}[language=C]
+    double alpha = inner_product(n, A, A) - inner_product(n, B, B);
+    double uuT_P[n];
+    for(int i=0; i<n; i++) {
+        uuT_P[i] = u[i]*inner_product(n, u, P);
+    }
+    double quad = inner_product(n, P, uuT_P);
+    quad -= D*D * inner_product(n, P, P);
+    double coeff[n];
+    for(int i=0; i<n; i++) {
+        coeff[i] = -(D*D+alpha)*u[i] + 2*D*D*A[i];
+    }
+    double lin = inner_product(n, coeff, P);
+    double constant = ((D*D+alpha)*(D*D+alpha))/4.0 - D*D*inner_product(n, A, A);
+
+    return quad + lin + constant;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Code (code.py)}
+\begin{lstlisting}[language=Python]
+import numpy as np
+import matplotlib.pyplot as plt
+
+def inner_product(u, v):
+    return np.dot(u, v)
+
+def locus_value(A, B, P, D):
+    u = A - B
+    alpha = inner_product(A, A) - inner_product(B, B)
+    quad = (np.dot(P, u))**2 - D*D*inner_product(P, P)
+    coeff = -(D*D+alpha)*u + 2*D*D*A
+    lin = inner_product(coeff, P)
+    constant = ((D*D+alpha)**2)/4.0 - D*D*inner_product(A, A)
+
+    return quad + lin + constant
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Code (code.py)}
+\begin{lstlisting}[language=Python]
+# Example: A=(0,4), B=(0,-4), delta=6
+A = np.array([0.0, 4.0])
+B = np.array([0.0, -4.0])
+D = 6.0
+
+x = np.linspace(-10, 10, 400)
+y = np.linspace(-10, 10, 400)
+X, Y = np.meshgrid(x, y)
+Z = np.zeros_like(X)
+
+
+
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Python Code (code.py)}
+\begin{lstlisting}[language=Python]
+
+for i in range(X.shape[0]):
+    for j in range(X.shape[1]):
+        P = np.array([X[i,j], Y[i,j]])
+        Z[i,j] = locus_value(A, B, P, D)
+
+plt.contour(X, Y, Z, levels=[0], colors="red")
+plt.axhline(0, color="k", linewidth=0.5)
+plt.axvline(0, color="k", linewidth=0.5)
+plt.gca().set_aspect("equal")
+plt.title("Locus using pure Python")
+plt.show()
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+import ctypes
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Load the shared library
+lib = ctypes.CDLL("./code.so")
+
+# Define function signature
+lib.locus_value.argtypes = [
+    ctypes.c_int,                           # dimension
+    np.ctypeslib.ndpointer(dtype=np.double), # A
+    np.ctypeslib.ndpointer(dtype=np.double), # B
+    np.ctypeslib.ndpointer(dtype=np.double), # P
+    ctypes.c_double                         # D
+]
+lib.locus_value.restype = ctypes.c_double
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+# Example: A=(0,4), B=(0,-4), delta=6
+A = np.array([0.0, 4.0], dtype=np.double)
+B = np.array([0.0, -4.0], dtype=np.double)
+D = 6.0
+
+# Create grid and evaluate locus
+x = np.linspace(-10, 10, 400)
+y = np.linspace(-10, 10, 400)
+X, Y = np.meshgrid(x, y)
+Z = np.zeros_like(X)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+for i in range(X.shape[0]):
+    for j in range(X.shape[1]):
+        P = np.array([X[i,j], Y[i,j]], dtype=np.double)
+        Z[i,j] = lib.locus_value(2, A, B, P, D)
+
+# Plot contour Z=0 (the locus)
+plt.contour(X, Y, Z, levels=[0], colors="blue")
+plt.axhline(0, color="k", linewidth=0.5)
+plt.axvline(0, color="k", linewidth=0.5)
+plt.gca().set_aspect("equal")
+plt.title("Locus using C library")
+plt.show()
+\end{lstlisting}
+\end{frame}
+
+\end{document}
+

@@ -1,0 +1,198 @@
+\let\negmedspace\undefined
+\let\negthickspace\undefined
+\documentclass[journal]{IEEEtran}
+\usepackage[a5paper, margin=10mm, onecolumn]{geometry}
+%\usepackage{lmodern} % Ensure lmodern is loaded for pdflatex
+\usepackage{tfrupee} % Include tfrupee package
+
+\setlength{\headheight}{1cm} % Set the height of the header box
+\setlength{\headsep}{0mm}     % Set the distance between the header box and the top of the text
+
+\usepackage{gvv-book}
+\usepackage{gvv}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{txfonts}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{gensymb}
+\usepackage{comment}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{tkz-euclide} 
+\usepackage{listings}
+% \usepackage{gvv}                                        
+\def\inputGnumericTable{}                                 
+\usepackage[latin1]{inputenc}                                
+\usepackage{color}                                            
+\usepackage{array}                                            
+\usepackage{longtable}                                       
+\usepackage{calc}                                             
+\usepackage{multirow}                                         
+\usepackage{hhline}                                           
+\usepackage{ifthen}                                           
+\usepackage{lscape}
+\usepackage{circuitikz}
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=4em, text centered, rounded corners, minimum height=3em]
+\tikzstyle{sum} = [draw, fill=blue!10, circle, minimum size=1cm, node distance=1.5cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+
+
+\begin{document}
+
+\bibliographystyle{IEEEtran}
+\vspace{3cm}
+
+\title{4.13.6}
+\author{EE25BTECH11001 - Aarush Dilawri}
+\maketitle
+% \newpage
+% \bigskip
+{\let\newpage\relax\maketitle}
+
+\renewcommand{\thefigure}{\theenumi}
+\renewcommand{\thetable}{\theenumi}
+\setlength{\intextsep}{10pt} % Space between text and floats
+
+
+\numberwithin{equation}{enumi}
+\numberwithin{figure}{enumi}
+\renewcommand{\thetable}{\theenumi}
+
+\textbf{Question}:\\
+Given the points $\vec{A} \brak{0,4}$ and $\vec{B} \brak{0,-4}$, the equation of the locus of the point $\vec{p}\brak{x,y}$, such that $\lvert AP -BP \rvert = 6$
+
+\solution \\
+\begin{align}
+    \vec{A},\,\vec{B},\,\vec{P} &\in \mathbb{R}^n
+\end{align}
+
+Let the given scalar be $ \delta \ge 0 $ and choose the sign $s\in\{+1,-1\}$ so that
+\begin{align}
+    r_1 - r_2 &= s\,\delta,
+\end{align}
+where $r_1=\|\vec{P}-\vec{A}\|$ and $r_2=\|\vec{P}-\vec{B}\|$.
+
+Define the difference vector
+\begin{align}
+    \vec{u} &= \vec{A}-\vec{B},
+\end{align}
+and the shorthand
+\begin{align}
+    D &= s\,\delta, \qquad
+    \alpha \;=\; \vec{A}^\top\vec{A} - \vec{B}^\top\vec{B}.
+\end{align}
+
+Compute the difference of squares:
+\begin{align}
+    \|\vec{P}-\vec{A}\|^2 - \|\vec{P}-\vec{B}\|^2
+    &= (\vec{P}-\vec{A})^\top(\vec{P}-\vec{A}) - (\vec{P}-\vec{B})^\top(\vec{P}-\vec{B}) \\
+    &= -2\,\vec{P}^\top\vec{u} + \vec{A}^\top\vec{A} - \vec{B}^\top\vec{B}
+    \;=\; -2\,\vec{P}^\top\vec{u} + \alpha .
+\end{align}
+
+Use $(r_1-r_2)(r_1+r_2)=r_1^2-r_2^2$ and $r_1-r_2 = D$ to get
+\begin{align}
+    D\,(r_1+r_2) &= -2\,\vec{P}^\top\vec{u} + \alpha
+    \quad\Longrightarrow\quad
+    r_1+r_2 \;=\; \frac{-2\,\vec{P}^\top\vec{u} + \alpha}{D}.
+\end{align}
+
+Hence
+\begin{align}
+    r_1 &= \frac{(r_1-r_2)+(r_1+r_2)}{2}
+        \;=\; \frac{D}{2} \;+\; \frac{\alpha}{2D} \;-\; \frac{\vec{P}^\top\vec{u}}{D}.
+\end{align}
+
+Square this expression and equate to the explicit quadratic form for $r_1^2$:
+\begin{align}
+    \left(\frac{D}{2} + \frac{\alpha}{2D} - \frac{\vec{P}^\top\vec{u}}{D}\right)^2
+    &= (\vec{P}-\vec{A})^\top(\vec{P}-\vec{A})
+    \;=\; \vec{P}^\top\vec{P} - 2\,\vec{P}^\top\vec{A} + \vec{A}^\top\vec{A}.
+\end{align}
+
+Multiply both sides by $D^2$ and simplify.  After collecting terms one obtains the general quadratic (conic) equation in the vector \(\vec{P}\):
+\begin{align}
+    \vec{P}^\top\big(\vec{u}\vec{u}^\top - D^2 I\big)\vec{P}
+    \;+\;
+    \big(-(D^2+\alpha)\,\vec{u} + 2D^2\,\vec{A}\big)^\top \vec{P}
+    \;+\;
+    \frac{(D^2+\alpha)^2}{4} - D^2\,\vec{A}^\top\vec{A}
+    \;=\; 0.
+\end{align}
+Now substitute $\vec{A}=\myvec{0\\4}$, $\vec{B}=\myvec{0\\-4}$ and $\delta=6$.
+
+\begin{align}
+    \vec{u} &= \vec{A}-\vec{B} = \myvec{0\\8} \\
+    \alpha &= \vec{A}^\top\vec{A} - \vec{B}^\top\vec{B} = 16 - 16 = 0 \\
+    D &= s\,\delta = \pm 6 \quad\Rightarrow\quad D^2 = 36
+\end{align}
+
+The quadratic matrix equation becomes
+\begin{align}
+    \vec{P}^\top\big(\vec{u}\vec{u}^\top - 36I\big)\vec{P}
+    + \big(-D^2\vec{u} + 2D^2\vec{A}\big)^\top \vec{P}
+    + \frac{D^4}{4} - 36\vec{A}^\top\vec{A} &= 0
+\end{align}
+
+Now compute each term.
+
+\begin{align}
+    \vec{u}\vec{u}^\top &= \myvec{0 & 0 \\ 0 & 64}, \qquad
+    I = \myvec{1 & 0 \\ 0 & 1}
+\end{align}
+
+So
+\begin{align}
+    \vec{u}\vec{u}^\top - 36I &= \myvec{-36 & 0 \\ 0 & 28}
+\end{align}
+
+Next, the linear coefficient:
+\begin{align}
+    -D^2\vec{u} + 2D^2\vec{A}
+    &= -36\myvec{0\\8} + 72\myvec{0\\4} \\
+    &= \myvec{0\\-288} + \myvec{0\\288} = \myvec{0\\0}
+\end{align}
+
+So there is no linear term.
+
+Finally, the constant term:
+\begin{align}
+    \frac{D^4}{4} - 36\vec{A}^\top\vec{A}
+    &= \frac{1296}{4} - 36(16) \\
+    &= 324 - 576 \\
+    &= -252
+\end{align}
+
+Therefore, the locus is given by
+\begin{align}
+    \vec{P}^\top\myvec{-36 & 0 \\ 0 & 28}\vec{P} - 252 &= 0
+\end{align}
+
+or equivalently
+\begin{align}
+    \vec{P}^\top\myvec{-36 & 0 \\ 0 & 28}\vec{P} &= 252
+\end{align}
+
+Expanding with $\vec{P}=\myvec{x\\y}$,
+\begin{align}
+    -36x^2 + 28y^2 &= 252
+\end{align}
+
+Dividing through,
+\begin{align}
+    \frac{y^2}{9} - \frac{x^2}{7} &= 1
+\end{align}
+
+Thus the locus is a hyperbola centered at the origin with equation
+\begin{align}
+    \frac{y^2}{9} - \frac{x^2}{7} = 1
+\end{align}
+
+\end{document}
