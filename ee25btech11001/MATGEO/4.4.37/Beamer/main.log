@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.8.5)  29 SEP 2025 19:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.8.5)  2 OCT 2025 21:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1562,7 +1562,7 @@ LaTeX Font Info:    Font shape `OT1/lmss/b/n' in size <6> not available
 [7
 
 ]
-<figs/fig.png, id=228, 471.7625pt x 441.65pt>
+<figs/fig.png, id=227, 471.7625pt x 441.65pt>
 File: figs/fig.png Graphic file (type png)
 <use figs/fig.png>
 Package pdftex.def Info: figs/fig.png  used on input line 97.
@@ -1670,7 +1670,7 @@ Package rerunfilecheck Info: Checksums for `main.out':
  ) 
 Here is how much of TeX's memory you used:
  50243 strings out of 474222
- 1185477 string characters out of 5748734
+ 1185473 string characters out of 5748734
  2082975 words of memory out of 5000000
  71588 multiletter control sequences out of 15000+600000
  599005 words of font info for 80 fonts, out of 8000000 for 9000
@@ -1684,7 +1684,7 @@ hare/texmf/fonts/type1/public/lm/lmsso10.pfb></usr/share/texmf/fonts/type1/publ
 ic/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/
 texlive/texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/txfonts/txsy.pfb>
-Output written on main.pdf (14 pages, 209673 bytes).
+Output written on main.pdf (14 pages, 209341 bytes).
 PDF statistics:
  496 PDF objects out of 1000 (max. 8388607)
  416 compressed objects within 5 object streams
