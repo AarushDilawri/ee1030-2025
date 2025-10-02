@@ -1,0 +1,222 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{txfonts}
+\usepackage{tkz-euclide}
+\usepackage{listings}
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{gvv}
+\usepackage{lmodern}
+\usepackage{circuitikz}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{mathtools} 
+
+\setbeamertemplate{page number in head/foot}[totalframenumber]
+
+\title{5.2.4}
+\date{\today}
+\author{EE25BTECH11001 - Aarush Dilawri}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Problem}
+\textbf{Question}:\\
+Solve the system of equations
+\begin{align}
+6x-3y+10=0
+\end{align}
+\begin{align}
+2x-y+9=0
+\end{align}
+\end{frame}
+
+\begin{frame}{Solution Setup}
+The equation of line:
+\begin{align}
+\vec{n}^\top\vec{x}=c
+\end{align}
+
+Line L:
+\begin{align}
+\myvec{6 & -3}\myvec{x \\ y}=-10
+\end{align}
+
+Line K:
+\begin{align}
+\myvec{2 & -1}\myvec{x \\ y}=-9
+\end{align}
+\end{frame}
+
+\begin{frame}{Matrix Form}
+These can be combined and written in matrix form:
+\begin{align}
+\myvec{6 & -3 \\ 2 & -1}\myvec{x \\ y} = \myvec{-10 \\ -9}
+\end{align}
+
+The following augmented matrix can be solved by Gaussian elimination:
+\begin{align}
+\augvec{2}{1}{6 & -3 & -10 \\ 2 & -1 & -9} \xleftrightarrow{R_2 \leftarrow 3R_2 - R_1} \augvec{2}{1}{6 & -3 & -10 \\ 0 & 0 & -17}
+\end{align}
+\end{frame}
+
+\begin{frame}{Rank and Solution}
+The rank of coefficient matrix is $1$ whereas the rank of the Augmented matrix is $0$. Thus, by Rouche–Capelli theorem:
+\begin{align}
+    \text{If rank}\brak{\vec{A}} \neq \text{rank}\brak{[\vec{A} \mid b]}\quad\text{, then the system has no solution.}
+\end{align}
+
+Hence, there are no solutions to this system of equations.
+\end{frame}
+
+\begin{frame}{Figure}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[height=0.5\textheight, keepaspectratio]{figs/fig.png}
+    \label{figure_1}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{C Code (code.c)}
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+1, double b1, double c1,
+                 double a2, double b2, double c2,
+                 double *x, double *y) {
+    double det = a1*b2 - a2*b1;
+    if(det != 0) {
+        *x = (b1*c2 - b2*c1) / det;
+        *y = (c1*a2 - c2*a1) / det;
+        return 1; // unique solution
+    }
+    // det = 0, check proportionality
+    if(a1*b2 == a2*b1 && a1*c2 == a2*c1 && b1*c2 == b2*c1) {
+        return 2; // infinite solutions
+    }
+    return 0; // no solution
+}
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Code (code.py)}
+\begin{lstlisting}[language=Python]
+# code.py
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Example equations: 6x - 3y + 10 = 0, 2x - y + 9 = 0
+a1, b1, c1 = 6, -3, 10
+a2, b2, c2 = 2, -1, 9
+
+det = a1*b2 - a2*b1
+xs = np.linspace(-10, 10, 400)
+
+if det != 0:
+    x = (b1*c2 - b2*c1) / det
+    y = (c1*a2 - c2*a1) / det
+    res = 1
+
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Code (code.py)}
+\begin{lstlisting}[language=Python]
+elif (a1*b2 == a2*b1 and a1*c2 == a2*c1 and b1*c2 == b2*c1):
+    res = 2
+else:
+    res = 0
+
+# Plot lines
+y1 = -(a1*xs + c1)/b1
+y2 = -(a2*xs + c2)/b2
+plt.plot(xs, y1, label=f"{a1}x+{b1}y+{c1}=0")
+plt.plot(xs, y2, label=f"{a2}x+{b2}y+{c2}=0")
+
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Python Code (code.py)}
+\begin{lstlisting}[language=Python]
+
+if res == 1:
+    plt.scatter([x],[y], color="red", zorder=5, label=f"Unique ({x:.2f},{y:.2f})")
+elif res == 2:
+    plt.title("Infinite solutions (same line)")
+else:
+    plt.title("No solution (parallel lines)")
+
+plt.legend()
+plt.grid(True)
+plt.show()
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+# nativecode.py
+import ctypes
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Load shared library
+lib = ctypes.CDLL("./code.so")
+
+lib.solve_linear.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double,
+                             ctypes.c_double, ctypes.c_double, ctypes.c_double,
+                             ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double)]
+lib.solve_linear.restype = ctypes.c_int
+
+
+
+
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+# Example equations: 6x - 3y + 10 = 0, 2x - y + 9 = 0
+a1, b1, c1 = 6, -3, 10
+a2, b2, c2 = 2, -1, 9
+x = ctypes.c_double()
+y = ctypes.c_double()
+
+res = lib.solve_linear(a1,b1,c1,a2,b2,c2,ctypes.byref(x),ctypes.byref(y))
+
+# Plot
+xs = np.linspace(-10, 10, 400)
+y1 = -(a1*xs + c1)/b1
+y2 = -(a2*xs + c2)/b2
+
+plt.plot(xs, y1, label=f"{a1}x+{b1}y+{c1}=0")
+plt.plot(xs, y2, label=f"{a2}x+{b2}y+{c2}=0")
+
+
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+if res == 1:
+    plt.scatter([x.value],[y.value], color="red", zorder=5,
+                label=f"Unique ({x.value:.2f},{y.value:.2f})")
+elif res == 2:
+    plt.title("Infinite solutions (same line)")
+else:
+    plt.title("No solution (parallel lines)")
+
+plt.legend()
+plt.grid(True)
+plt.show()
+\end{lstlisting}
+\end{frame}
+
+\end{document}

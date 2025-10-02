@@ -1,0 +1,115 @@
+\let\negmedspace\undefined
+\let\negthickspace\undefined
+\documentclass[journal]{IEEEtran}
+\usepackage[a5paper, margin=10mm, onecolumn]{geometry}
+%\usepackage{lmodern} % Ensure lmodern is loaded for pdflatex
+\usepackage{tfrupee} % Include tfrupee package
+
+\setlength{\headheight}{1cm} % Set the height of the header box
+\setlength{\headsep}{0mm}     % Set the distance between the header box and the top of the text
+
+\usepackage{gvv-book}
+\usepackage{gvv}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+%\usepackage{txfonts}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{gensymb}
+\usepackage{comment}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{tkz-euclide} 
+\usepackage{listings}
+% \usepackage{gvv}                                        
+\def\inputGnumericTable{}                                 
+\usepackage[latin1]{inputenc}                                
+\usepackage{color}                                            
+\usepackage{array}                                            
+\usepackage{longtable}                                       
+\usepackage{calc}                                             
+\usepackage{multirow}                                         
+\usepackage{hhline}                                           
+\usepackage{ifthen}                                           
+\usepackage{lscape}
+\usepackage{circuitikz}
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=4em, text centered, rounded corners, minimum height=3em]
+\tikzstyle{sum} = [draw, fill=blue!10, circle, minimum size=1cm, node distance=1.5cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+
+
+\begin{document}
+
+\bibliographystyle{IEEEtran}
+\vspace{3cm}
+
+\title{5.2.4}
+\author{EE25BTECH11001 - Aarush Dilawri}
+\maketitle
+{\let\newpage\relax\maketitle}
+
+\renewcommand{\thefigure}{\theenumi}
+\renewcommand{\thetable}{\theenumi}
+\setlength{\intextsep}{10pt} % Space between text and floats
+
+\numberwithin{equation}{enumi}
+\numberwithin{figure}{enumi}
+\renewcommand{\thetable}{\theenumi}
+
+\textbf{Question}:\\
+Solve the system of equations
+\begin{align}
+6x-3y+10=0
+\end{align}
+\begin{align}
+2x-y+9=0
+\end{align}
+
+\solution \\
+
+The equation of line:
+\begin{align}
+	\vec{n}^\top\vec{x}=c
+\end{align}
+
+Line L:
+\begin{align}
+\myvec{6 & -3}\myvec{x \\ y}=-10
+\end{align}
+
+Line K:
+\begin{align}
+\myvec{2 & -1}\myvec{x \\ y}=-9
+\end{align}
+
+These can be combined and written in matrix form:
+\begin{align}
+\myvec{6 & -3 \\ 2 & -1}\myvec{x \\ y} = \myvec{-10 \\ -9}
+\end{align}
+
+The following augmented matrix can be solved by gaussian elimination
+\begin{align}
+\augvec{2}{1}{6 & -3 & -10 \\ 2 & -1 & -9} \xleftrightarrow{R_2 \leftarrow 3R_2 - R_1} \augvec{2}{1}{6 & -3 & -10 \\ 0 & 0 & -17}
+\end{align}
+
+The rank of coefficient matrix is $1$ whereas the rank of the Augmented matrix is $0$. Thus, by Rouche Capelli theorem,\\
+\begin{align}
+    \text{If rank}\brak{\vec{A}} \neq \text{rank}\brak{[\vec{A} \mid b]}\quad\text{, then the system has no solution.}
+\end{align}
+
+
+Hence, there are no solutions to this system of equations.
+\newpage
+See Figure,
+\begin{figure}[h!]
+    \centering
+    \includegraphics[height=0.5\textheight, keepaspectratio]{figs/fig.png}
+    \label{figure_1}
+\end{figure}
+\end{document}
