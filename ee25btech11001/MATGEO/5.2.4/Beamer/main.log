@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.8.5)  3 OCT 2025 00:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.8.5)  3 OCT 2025 16:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1328,13 +1328,13 @@ LaTeX Font Info:    Trying to load font information for OT1+lmss on input line
 
 (/usr/share/texmf/tex/latex/lm/ot1lmss.fd
 File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-No file main.aux.
+) (./main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/txmi/m/it on input line 26.
 LaTeX Font Info:    Trying to load font information for OML+txmi on input line 
 26.
+
 (/usr/share/texlive/texmf-dist/tex/latex/txfonts/omltxmi.fd
 File: omltxmi.fd 2000/12/15 v3.1
 )
@@ -1431,6 +1431,8 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 Package hyperref Info: Link coloring OFF on input line 26.
+
+(./main.out) (./main.out)
 \@outlinefile=\write5
 \openout5 = `main.out'.
 
@@ -1506,15 +1508,14 @@ ry-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
 \c@lstlisting=\count379
-
-No file main.nav.
-[1
+ (./main.nav) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf/fonts/enc/
 dvips/lm/lm-rm.enc}]
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3
 9.
- (/usr/share/texmf/tex/latex/lm/omllmm.fd
+
+(/usr/share/texmf/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
@@ -1587,7 +1588,7 @@ LaTeX Font Info:    Font shape `OT1/lmss/b/n' in size <6> not available
 ] [5
 
 ]
-<figs/fig.png, id=174, 570.13pt x 443.6575pt>
+<figs/fig.png, id=176, 570.13pt x 443.6575pt>
 File: figs/fig.png Graphic file (type png)
 <use figs/fig.png>
 Package pdftex.def Info: figs/fig.png  used on input line 85.
@@ -1690,23 +1691,14 @@ L3 programming layer <2020/03/25>
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 50862 strings out of 474222
- 1197030 string characters out of 5748734
- 2138531 words of memory out of 5000000
- 72197 multiletter control sequences out of 15000+600000
+ 50904 strings out of 474222
+ 1197404 string characters out of 5748734
+ 2139059 words of memory out of 5000000
+ 72231 multiletter control sequences out of 15000+600000
  599005 words of font info for 80 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
  128i,19n,123p,1172b,1513s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1719,7 +1711,7 @@ ic/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/
 texlive/texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/txfonts/txsy.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/txfonts/txsyc.pfb>
-Output written on main.pdf (13 pages, 204068 bytes).
+Output written on main.pdf (13 pages, 204319 bytes).
 PDF statistics:
  474 PDF objects out of 1000 (max. 8388607)
  394 compressed objects within 4 object streams
