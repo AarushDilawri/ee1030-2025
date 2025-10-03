@@ -1,0 +1,176 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{txfonts}
+\usepackage{tkz-euclide}
+\usepackage{listings}
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{gvv}
+\usepackage{lmodern}
+\usepackage{circuitikz}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{mathtools} 
+\setbeamertemplate{page number in head/foot}[totalframenumber]
+
+\title{5.3.35}
+\date{\today}
+\author{EE25BTECH11001 - Aarush Dilawri}
+
+\begin{document}
+
+\frame{\titlepage}
+\begin{frame}{Question}
+\textbf{Question}:\\
+If the pair of equations
+\begin{align}
+    3x-y+8=0\\
+    6x-ry+16=0
+\end{align}
+represent coincident lines, then find the value of $r$.
+\end{frame}
+
+\begin{frame}{Solution}
+
+The equation of line:
+\begin{align}
+\vec{n}^\top\vec{x}=c
+\end{align}
+
+Line L:
+\begin{align}
+\myvec{3 & -1}\myvec{x \\ y}=-8
+\end{align}
+
+Line K:
+\begin{align}
+\myvec{6 & -r}\myvec{x \\ y}=-16
+\end{align}
+\end{frame}
+
+\begin{frame}{Matrix Form}
+These can be combined and written in matrix form:
+\begin{align}
+\myvec{3 & -1 \\ 6 & -r}\myvec{x \\ y} = \myvec{-8 \\ -16}
+\end{align}
+
+The following augmented matrix can be solved by gaussian elimination
+\begin{align}
+\augvec{2}{1}{3 & -1 & -8 \\ 6 & -r & -16} 
+\xleftrightarrow{R_2 \rightarrow R_2 - 2R_1} 
+\augvec{2}{1}{3 & -1 & -8 \\ 0 & -r+2 & 0}
+\end{align}
+\end{frame}
+
+\begin{frame}{Rouché–Capelli Application}
+Since the lines are coincident, they have infinitely many solutions.
+\begin{align}
+    \text{Thus, rank}\brak{\vec{A}} = \text{rank}\brak{[\vec{A} \mid b]}<n \quad\text{where $n$ is the number of variables.}
+\end{align}
+\begin{align}
+    \implies -r+2 =0
+    \implies r=2
+\end{align}
+Hence, the value of $r$ is $2$.
+\end{frame}
+
+\begin{frame}{Graphical Representation}
+See Figure,
+\begin{figure}[h!]
+    \centering
+    \includegraphics[height=0.5\textheight, keepaspectratio]{figs/fig.png}
+    \label{figure_1}
+\end{figure}
+\end{frame}
+\begin{frame}[fragile]{C Code (code.c)}
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+// Function to find r such that the lines are coincident
+// Lines: a1*x + b1*y + c1 = 0
+//        a2*x + (-r)*y + c2 = 0
+double find_r(double a1, double b1, double c1, double a2, double c2) {
+    // Since line2 normal = (a2, -r), it must be proportional to (a1, b1)
+    // So, a2/a1 = (-r)/b1  AND  c2/c1 = a2/a1
+    double k = a2 / a1; 
+    double r = -k * b1; 
+    return r;
+}
+
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Code (code.py)}
+\begin{lstlisting}[language=Python]
+import numpy as np
+import matplotlib.pyplot as plt
+
+a1, b1, c1 = 3, -1, 8
+a2, b2, c2 = 6, -2, 16   # since r = 2
+
+def line1(x): return (a1*x + c1)/(-b1)
+def line2(x): return (a2*x + c2)/(-b2)
+
+x = np.linspace(-10, 10, 100)
+plt.plot(x, line1(x), label="Line 1")
+plt.plot(x, line2(x), label="Line 2 (r=2)")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+import ctypes
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Load the shared library
+code = ctypes.CDLL("./code.so")
+
+# Declare function signature
+code.find_r.restype = ctypes.c_double
+code.find_r.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+
+# Given coefficients
+a1, b1, c1 = 3, -1, 8
+a2, c2 = 6, 16
+
+
+
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+# Call C function
+r = code.find_r(a1, b1, c1, a2, c2)
+print("Value of r:", r)
+
+# Define line equations
+def line1(x): return (a1*x + c1)/(-b1)
+def line2(x): return (a2*x + c2)/(-(-r))
+
+# Plot
+x = np.linspace(-10, 10, 100)
+plt.plot(x, line1(x), label="Line 1")
+plt.plot(x, line2(x), label="Line 2 (with r)")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+\end{lstlisting}
+\end{frame}
+
+
+
+\end{document}
