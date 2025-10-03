@@ -1,0 +1,173 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{txfonts}
+\usepackage{tkz-euclide}
+\usepackage{listings}
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{gvv}
+\usepackage{lmodern}
+\usepackage{circuitikz}
+\usepackage{tikz}
+\usepackage{graphicx}
+
+\setbeamertemplate{page number in head/foot}[totalframenumber]
+
+\title{5.7.14}
+\date{\today}
+\author{EE25BTECH11001 - Aarush Dilawri}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Question}
+\textbf{Question}:\\
+If $\vec{A} = \myvec{-3 & 6 \\ -2 & 4}$, then show that $\vec{A}^3 = \vec{A}$.
+\end{frame}
+
+\begin{frame}{Characteristic Polynomial}
+
+The characteristic equation of $\vec{A}$ is given by:
+\begin{align}
+    f\brak{\lambda} = \lvert\vec{A}-\lambda\vec{I}\rvert =0
+\end{align}
+Therefore,
+\begin{align}
+    f\brak{\lambda} = \mydet{-3-\lambda & 6 \\ -2 & 4-\lambda} =0\\
+    f\brak{\lambda}=\lambda^2 -\lambda =0    
+\end{align}
+\end{frame}
+
+\begin{frame}{Applying Cayley-Hamilton}
+By Cayley-Hamilton theorem,
+\begin{align}
+    f\brak{\lambda} = f\brak{\vec{A}} =0
+\end{align}
+Therefore,
+\begin{align}
+    \vec{A}^2 - \vec{A} =0
+    \implies \vec{A}^2 = \vec{A}
+\end{align}
+\end{frame}
+
+\begin{frame}{Final Step}
+Pre-multiplying both sides by $\vec{A}$,
+\begin{align}
+    \vec{A}^3 &= \vec{A}^2\quad\text{but $\vec{A}^2 = \vec{A}$}\\
+    \implies \vec{A}^3 = \vec{A}
+\end{align}
+Hence proved.
+\end{frame}
+
+\begin{frame}{Graphical Representation}
+See Figure,
+\begin{figure}[h!]
+    \centering
+    \includegraphics[height=0.5\textheight, keepaspectratio]{figs/fig.png}
+    \label{figure_1}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]{C Code (code.c)}
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+// Function to compute characteristic polynomial coefficients of a 2x2 matrix
+// Input: a11, a12, a21, a22
+// Output: coeffs[0] = 1 (λ^2), coeffs[1] = -trace(A), coeffs[2] = det(A)
+void char_poly(double a11, double a12, double a21, double a22, double* coeffs) {
+    double trace = a11 + a22;
+    double det = a11 * a22 - a12 * a21;
+
+    coeffs[0] = 1.0;       // λ^2 coefficient
+    coeffs[1] = -trace;    // λ coefficient
+    coeffs[2] = det;       // constant term
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Code (code.py)}
+\begin{lstlisting}[language=Python]
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Given matrix A
+a11, a12, a21, a22 = -3, 6, -2, 4
+
+# Compute trace and determinant
+trace = a11 + a22
+det = a11*a22 - a12*a21
+
+# Polynomial coefficients
+coeffs = [1, -trace, det]
+print("Characteristic Polynomial Coefficients:", coeffs)
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Code (code.py)}
+\begin{lstlisting}[language=Python]
+# Define polynomial
+lam = np.linspace(-10, 10, 400)
+poly_vals = coeffs[0]*lam**2 + coeffs[1]*lam + coeffs[2]
+
+# Plot
+plt.axhline(0, color='black', linewidth=0.8)
+plt.plot(lam, poly_vals, label="Characteristic Polynomial")
+plt.xlabel("λ")
+plt.ylabel("p(λ)")
+plt.legend()
+plt.grid(True)
+plt.show()
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+import ctypes
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Load the shared library
+code = ctypes.CDLL("./code.so")
+
+# Define argument and return types
+code.char_poly.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double,
+                           np.ctypeslib.ndpointer(dtype=np.float64, ndim=1, flags="C")]
+
+coeffs = np.zeros(3, dtype=np.float64)
+
+a11, a12, a21, a22 = -3, 6, -2, 4
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+# Call C function
+code.char_poly(a11, a12, a21, a22, coeffs)
+print("Characteristic Polynomial Coefficients:", coeffs)
+
+# Define polynomial
+lam = np.linspace(-10, 10, 400)
+poly_vals = coeffs[0]*lam**2 + coeffs[1]*lam + coeffs[2]
+
+# Plot
+plt.axhline(0, color='black', linewidth=0.8)
+plt.plot(lam, poly_vals, label="Characteristic Polynomial")
+plt.xlabel("λ")
+plt.ylabel("p(λ)")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+\end{lstlisting}
+\end{frame}
+
+\end{document}
