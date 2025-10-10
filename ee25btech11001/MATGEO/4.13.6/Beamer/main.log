@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.8.5)  3 OCT 2025 00:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.8.5)  10 OCT 2025 12:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1328,13 +1328,13 @@ LaTeX Font Info:    Trying to load font information for OT1+lmss on input line
 
 (/usr/share/texmf/tex/latex/lm/ot1lmss.fd
 File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-No file main.aux.
+) (./main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/txmi/m/it on input line 25.
 LaTeX Font Info:    Trying to load font information for OML+txmi on input line 
 25.
+
 (/usr/share/texlive/texmf-dist/tex/latex/txfonts/omltxmi.fd
 File: omltxmi.fd 2000/12/15 v3.1
 )
@@ -1431,6 +1431,8 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 Package hyperref Info: Link coloring OFF on input line 25.
+
+(./main.out) (./main.out)
 \@outlinefile=\write5
 \openout5 = `main.out'.
 
@@ -1506,15 +1508,14 @@ ry-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
 \c@lstlisting=\count379
-
-No file main.nav.
-[1
+ (./main.nav) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf/fonts/enc/
 dvips/lm/lm-rm.enc}]
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3
 2.
- (/usr/share/texmf/tex/latex/lm/omllmm.fd
+
+(/usr/share/texmf/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
@@ -1588,27 +1589,27 @@ dvips/lm/lm-mathsy.enc}] [3
 
 ]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 80.
+(Font)              <14.4> on input line 88.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 80.
+(Font)              <10> on input line 88.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 80.
+(Font)              <7> on input line 88.
 LaTeX Font Info:    Font shape `OT1/lmss/b/n' in size <14.4> not available
-(Font)              Font shape `OT1/lmss/bx/n' tried instead on input line 80.
+(Font)              Font shape `OT1/lmss/bx/n' tried instead on input line 88.
 LaTeX Font Info:    Font shape `OT1/lmss/b/n' in size <10> not available
-(Font)              Font shape `OT1/lmss/bx/n' tried instead on input line 80.
+(Font)              Font shape `OT1/lmss/bx/n' tried instead on input line 88.
 LaTeX Font Info:    Font shape `OT1/lmss/b/n' in size <7> not available
-(Font)              Font shape `OT1/lmss/bx/n' tried instead on input line 80.
+(Font)              Font shape `OT1/lmss/bx/n' tried instead on input line 88.
 LaTeX Font Info:    Font shape `OT1/lmss/m/it' in size <14.4> not available
-(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 80.
+(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 88.
 LaTeX Font Info:    Font shape `OT1/lmss/m/it' in size <10> not available
-(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 80.
+(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 88.
 LaTeX Font Info:    Font shape `OT1/lmss/m/it' in size <7> not available
-(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 80.
+(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 88.
  [6
 
 ]
-Overfull \hbox (37.82433pt too wide) detected at line 99
+Overfull \hbox (37.82433pt too wide) detected at line 107
 []
  []
 
@@ -1623,10 +1624,10 @@ Overfull \hbox (37.82433pt too wide) detected at line 99
 ] [11
 
 ]
-<figs/fig.png, id=340, 570.13pt x 443.6575pt>
+<figs/fig.png, id=342, 570.13pt x 443.6575pt>
 File: figs/fig.png Graphic file (type png)
 <use figs/fig.png>
-Package pdftex.def Info: figs/fig.png  used on input line 161.
+Package pdftex.def Info: figs/fig.png  used on input line 169.
 (pdftex.def)             Requested size: 167.36044pt x 130.24007pt.
 
 [12
@@ -1672,7 +1673,7 @@ LaTeX Font Warning: Font shape `OML/lmss/m/it' undefined
 (Font)              for symbol `textless' on input line 14.
 
 )
-Overfull \vbox (3.32909pt too high) detected at line 181
+Overfull \vbox (3.32909pt too high) detected at line 189
  []
 
 [13
@@ -1681,7 +1682,7 @@ Overfull \vbox (3.32909pt too high) detected at line 181
 \openout4 = `main.vrb'.
 
  (./main.vrb)
-Overfull \vbox (16.92908pt too high) detected at line 201
+Overfull \vbox (16.92908pt too high) detected at line 209
  []
 
 [14
@@ -1707,7 +1708,7 @@ File: lstlang1.sty 2023/02/27 1.9 listings language file
 \openout4 = `main.vrb'.
 
  (./main.vrb)
-Overfull \vbox (3.32909pt too high) detected at line 277
+Overfull \vbox (3.32909pt too high) detected at line 285
  []
 
 [18
@@ -1741,23 +1742,14 @@ L3 programming layer <2020/03/25>
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 50950 strings out of 474222
- 1197955 string characters out of 5748734
- 2158774 words of memory out of 5000000
- 72264 multiletter control sequences out of 15000+600000
+ 51010 strings out of 474222
+ 1198596 string characters out of 5748734
+ 2159557 words of memory out of 5000000
+ 72316 multiletter control sequences out of 15000+600000
  628040 words of font info for 112 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
  128i,15n,123p,1172b,1511s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1771,7 +1763,7 @@ e/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/l
 m/lmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsy.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/txfonts/txsyb.pfb>
-Output written on main.pdf (20 pages, 236757 bytes).
+Output written on main.pdf (20 pages, 237420 bytes).
 PDF statistics:
  682 PDF objects out of 1000 (max. 8388607)
  581 compressed objects within 6 object streams

@@ -66,35 +66,41 @@
 \renewcommand{\thetable}{\theenumi}
 
 \textbf{Question}:\\
-Given the points $\vec{A} \brak{0,4}$ and $\vec{B} \brak{0,-4}$, the equation of the locus of the point $\vec{p}\brak{x,y}$, such that $\lvert AP -BP \rvert = 6$
+Given the points $\vec{A} \brak{0,4}$ and $\vec{B} \brak{0,-4}$, the equation of the locus of the point $\vec{p}\brak{x,y}$, such that $\brak{AP - BP}^2 = 6^2$
 
 \solution \\
 \begin{align}
     \vec{A},\,\vec{B},\,\vec{P} &\in \mathbb{R}^n
 \end{align}
 
-Let the given scalar be $ \delta \ge 0 $ and choose the sign $s\in\{+1,-1\}$ so that
+Let the given scalar be $ \delta \ge 0 $ 
 \begin{align}
-    r_1 - r_2 &= s\,\delta,
+    \brak{r_1 -r_2}^2 = \delta^2
 \end{align}
-where $r_1=\|\vec{P}-\vec{A}\|$ and $r_2=\|\vec{P}-\vec{B}\|$.
+where $r_1=\|\vec{P}-\vec{A}\|$ and $r_2=\|\vec{P}-\vec{B}\|$.\\
 
-Define the difference vector
+Taking square root, 
 \begin{align}
-    \vec{u} &= \vec{A}-\vec{B},
+    \lvert r_1 - r_2 \rvert = \pm\delta
 \end{align}
-and the shorthand
+Let's define
 \begin{align}
-    D &= s\,\delta, \qquad
-    \alpha \;=\; \vec{A}^\top\vec{A} - \vec{B}^\top\vec{B}.
+    D = s\,\delta
 \end{align}
-
-Compute the difference of squares:
+where $s\in \cbrak{+1,-1}$ such that
+\begin{align}
+    r_1 -r_2 = s\delta = D
+\end{align}
+Let's find $r_1^2 -r_2^2$
 \begin{align}
     \|\vec{P}-\vec{A}\|^2 - \|\vec{P}-\vec{B}\|^2
     &= (\vec{P}-\vec{A})^\top(\vec{P}-\vec{A}) - (\vec{P}-\vec{B})^\top(\vec{P}-\vec{B}) \\
     &= -2\,\vec{P}^\top\vec{u} + \vec{A}^\top\vec{A} - \vec{B}^\top\vec{B}
     \;=\; -2\,\vec{P}^\top\vec{u} + \alpha .
+\end{align}
+where
+\begin{align}
+    \vec{u} = \vec{A} -\vec{B} \quad \text{and} \quad  \alpha \;=\; \vec{A}^\top\vec{A} - \vec{B}^\top\vec{B}.
 \end{align}
 
 Use $(r_1-r_2)(r_1+r_2)=r_1^2-r_2^2$ and $r_1-r_2 = D$ to get
