@@ -1,0 +1,18 @@
+\frametitle{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+a = np.sqrt(C.value/A.value)
+b = np.sqrt(C.value/B.value)
+x = a * np.cos(theta)
+y = b * np.sin(theta)
+
+plt.figure(figsize=(6,6))
+plt.plot(x, y, label=f"{A.value:.2f} x² + {B.value:.2f} y² = {C.value:.0f}")
+plt.scatter(x0, y0, color='red', label='(-3,1)')
+plt.axhline(0, color='gray', linewidth=0.5)
+plt.axvline(0, color='gray', linewidth=0.5)
+plt.gca().set_aspect('equal', adjustable='box')
+plt.legend()
+plt.grid(True)
+plt.title('Ellipse from C Library')
+plt.show()
+\end{lstlisting}

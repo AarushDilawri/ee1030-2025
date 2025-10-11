@@ -1,0 +1,221 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{txfonts}
+\usepackage{tkz-euclide}
+\usepackage{listings}
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{gvv}
+\usepackage{lmodern}
+\usepackage{circuitikz}
+\usepackage{tikz}
+\usepackage{graphicx}
+
+\setbeamertemplate{page number in head/foot}[totalframenumber]
+
+\title{8.4.4}
+\date{\today}
+\author{EE25BTECH11001 - Aarush Dilawri}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Question}
+\textbf{Question}:\\
+Equation of the ellipse whose axes are the coordinates and which passes through the point $\brak{-3,1}$ and has eccentricity $\sqrt{\frac{2}{5}}$ is
+\end{frame}
+\begin{frame}{Solution}
+\textbf{Solution:} \\
+The general equation of a conic can be written as:
+
+\begin{align}
+\vec{x}^T \vec{V} \vec{x} + 2 \vec{u}^T \vec{x} + f = 0
+\end{align}
+
+Since the ellipse is centered at origin, we have
+
+\begin{align}
+\vec{u} = \myvec{0 \\ 0}, \quad f = -1
+\end{align}
+\end{frame}
+\begin{frame}{Solution}
+Let the major axis be along the X-axis:
+
+\begin{align}
+\vec{n} = \myvec{1 \\ 0}, \quad e = \sqrt{\frac{2}{5}}
+\end{align}
+
+Then, using the formula:
+
+\begin{align}
+\vec{V} = \norm{\vec{n}}^2 \vec{I} - e^2 \vec{n} \vec{n}^T
+\end{align}
+
+we get
+
+\begin{align}
+\vec{V} = \myvec{1 - \frac{2}{5} & 0 \\ 0 & 1} = \myvec{\frac{3}{5} & 0 \\ 0 & 1}
+\end{align}
+\end{frame}
+    
+\begin{frame}{Solution}
+The ellipse passes through the point $\brak{-3,1}$, so scale $\vec{V}$ such that:
+
+\begin{align}
+\vec{x}_0^T \vec{V} \vec{x}_0 = 1, \quad \vec{x}_0 = \myvec{-3 \\ 1}
+\end{align}
+
+This gives
+
+\begin{align}
+\vec{V} = \frac{5}{32} \myvec{\frac{3}{5} & 0 \\ 0 & 1} = \myvec{\frac{3}{32} & 0 \\ 0 & \frac{5}{32}}
+\end{align}
+\end{frame}
+
+
+\begin{frame}{Solution}
+Hence, the equation of the ellipse is:
+
+\begin{align}
+\vec{x}^T \myvec{\frac{3}{32} & 0 \\ 0 & \frac{5}{32}} \vec{x} = 1
+\end{align}
+
+Or equivalently:
+
+\begin{align}
+3 x^2 + 5 y^2 = 32
+\end{align}
+\end{frame}
+
+\begin{frame}{Figure}
+\begin{center}
+\includegraphics[width=0.6\columnwidth]{figs/fig.png}
+\end{center}
+\end{frame}
+\begin{frame}[fragile]{C Code (code.c)}
+\begin{lstlisting}[language=C]
+#include <math.h>
+int ellipse_equation(double *A, double *B, double *C,
+                     double x0, double y0, double e)
+{
+    double V11 = 1.0 - e*e;
+    double V22 = 1.0;
+
+    double val = V11*x0*x0 + V22*y0*y0;
+    double scale = 1.0 / val;
+
+    *A = V11 * scale;
+    *B = V22 * scale;
+    *C = 1.0;
+
+    return 0;
+}
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Python Code (code.py)}
+\begin{lstlisting}[language=Python]
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Given parameters
+x0, y0 = -3.0, 1.0
+e = np.sqrt(2.0/5.0)
+
+V11 = 1 - e**2
+V22 = 1
+
+val = V11*x0**2 + V22*y0**2
+scale = 1.0 / val
+A = V11 * scale
+B = V22 * scale
+C = 1.0
+
+print(f"Ellipse equation (Python): {A:.6f} x^2 + {B:.6f} y^2 = {C:.6f}")
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Python Code (code.py)}
+\begin{lstlisting}[language=Python]
+theta = np.linspace(0, 2*np.pi, 400)
+a = np.sqrt(C/A)
+b = np.sqrt(C/B)
+x = a * np.cos(theta)
+y = b * np.sin(theta)
+
+plt.figure(figsize=(6,6))
+plt.plot(x, y, label=f"{A:.2f} x² + {B:.2f} y² = {C:.0f}")
+plt.scatter(x0, y0, color='red', label='(-3,1)')
+plt.axhline(0, color='gray', linewidth=0.5)
+plt.axvline(0, color='gray', linewidth=0.5)
+plt.gca().set_aspect('equal', adjustable='box')
+plt.legend()
+plt.grid(True)
+plt.title('Ellipse (Python only)')
+plt.show()
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+import ctypes
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Load the shared library
+lib = ctypes.CDLL('./code.so')
+
+# Define argument and return types
+lib.ellipse_equation.argtypes = [ctypes.POINTER(ctypes.c_double),
+                                 ctypes.POINTER(ctypes.c_double),
+                                 ctypes.POINTER(ctypes.c_double),
+                                 ctypes.c_double,
+                                 ctypes.c_double,
+                                 ctypes.c_double]
+lib.ellipse_equation.restype = ctypes.c_int  # returning int now
+
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+A = ctypes.c_double()
+B = ctypes.c_double()
+C = ctypes.c_double()
+x0 = -3.0
+y0 = 1.0
+e = np.sqrt(2.0/5.0)
+
+ret = lib.ellipse_equation(ctypes.byref(A), ctypes.byref(B), ctypes.byref(C), x0, y0, e)
+
+if ret != 0:
+    raise RuntimeError("Error computing ellipse coefficients in C.")
+
+print(f"Ellipse equation from C: {A.value:.6f} x^2 + {B.value:.6f} y^2 = {C.value:.6f}")
+
+theta = np.linspace(0, 2*np.pi, 400)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+a = np.sqrt(C.value/A.value)
+b = np.sqrt(C.value/B.value)
+x = a * np.cos(theta)
+y = b * np.sin(theta)
+
+plt.figure(figsize=(6,6))
+plt.plot(x, y, label=f"{A.value:.2f} x² + {B.value:.2f} y² = {C.value:.0f}")
+plt.scatter(x0, y0, color='red', label='(-3,1)')
+plt.axhline(0, color='gray', linewidth=0.5)
+plt.axvline(0, color='gray', linewidth=0.5)
+plt.gca().set_aspect('equal', adjustable='box')
+plt.legend()
+plt.grid(True)
+plt.title('Ellipse from C Library')
+plt.show()
+\end{lstlisting}
+\end{frame}
+\end{document}
+

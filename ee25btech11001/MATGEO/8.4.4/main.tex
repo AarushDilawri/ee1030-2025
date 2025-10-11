@@ -1,0 +1,121 @@
+\let\negmedspace\undefined
+\let\negthickspace\undefined
+\documentclass[journal]{IEEEtran}
+\usepackage[a5paper, margin=10mm, onecolumn]{geometry}
+%\usepackage{lmodern} % Ensure lmodern is loaded for pdflatex
+\usepackage{tfrupee} % Include tfrupee package
+
+\setlength{\headheight}{1cm} % Set the height of the header box
+\setlength{\headsep}{0mm}     % Set the distance between the header box and the top of the text
+
+\usepackage{gvv-book}
+\usepackage{gvv}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{txfonts}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{gensymb}
+\usepackage{comment}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{tkz-euclide} 
+\usepackage{listings}
+% \usepackage{gvv}                                        
+\def\inputGnumericTable{}                                 
+\usepackage[latin1]{inputenc}                                
+\usepackage{color}                                            
+\usepackage{array}                                            
+\usepackage{longtable}                                       
+\usepackage{calc}                                             
+\usepackage{multirow}                                         
+\usepackage{hhline}                                           
+\usepackage{ifthen}                                           
+\usepackage{lscape}
+\begin{document}
+
+\bibliographystyle{IEEEtran}
+\vspace{3cm}
+
+\title{8.4.4}
+\author{EE25BTECH11001 - Aarush Dilawri}
+% \maketitle
+% \newpage
+% \bigskip
+{\let\newpage\relax\maketitle}
+
+\renewcommand{\thefigure}{\theenumi}
+\renewcommand{\thetable}{\theenumi}
+\setlength{\intextsep}{10pt} % Space between text and floats
+\textbf{Question}:\\
+Equation of the ellipse whose axes are the coordinates and which passes through the point $\brak{-3,1}$ and has eccentricity $\sqrt{\frac{2}{5}}$ is\\
+
+\textbf{Solution:} \\
+The general equation of a conic can be written as:
+
+\begin{align}
+\vec{x}^T \vec{V} \vec{x} + 2 \vec{u}^T \vec{x} + f = 0
+\end{align}
+
+Since the ellipse is centered at origin, we have
+
+\begin{align}
+\vec{u} = \myvec{0 \\ 0}, \quad f = -1
+\end{align}
+
+Let the major axis be along the X-axis:
+
+\begin{align}
+\vec{n} = \myvec{1 \\ 0}, \quad e = \sqrt{\frac{2}{5}}
+\end{align}
+
+Then, using the formula:
+
+\begin{align}
+\vec{V} = \norm{\vec{n}}^2 \vec{I} - e^2 \vec{n} \vec{n}^T
+\end{align}
+
+we get
+
+\begin{align}
+\vec{V} = \myvec{1 - \frac{2}{5} & 0 \\ 0 & 1} = \myvec{\frac{3}{5} & 0 \\ 0 & 1}
+\end{align}
+
+The ellipse passes through the point $\brak{-3,1}$, so scale $\vec{V}$ such that:
+
+\begin{align}
+\vec{x}_0^T \vec{V} \vec{x}_0 = 1, \quad \vec{x}_0 = \myvec{-3 \\ 1}
+\end{align}
+
+This gives
+
+\begin{align}
+\vec{V} = \frac{5}{32} \myvec{\frac{3}{5} & 0 \\ 0 & 1} = \myvec{\frac{3}{32} & 0 \\ 0 & \frac{5}{32}}
+\end{align}
+
+Hence, the equation of the ellipse is:
+
+\begin{align}
+\vec{x}^T \myvec{\frac{3}{32} & 0 \\ 0 & \frac{5}{32}} \vec{x} = 1
+\end{align}
+
+Or equivalently:
+
+\begin{align}
+3 x^2 + 5 y^2 = 32
+\end{align}
+
+
+See Fig. 0 ,
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.6\columnwidth]{figs/fig.png}
+\end{center}
+\caption{}
+\label{fig:Fig1}
+\end{figure}
+\end{document}
