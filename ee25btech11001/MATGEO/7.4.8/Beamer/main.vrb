@@ -1,16 +1,18 @@
-\frametitle{Python Code (nativecode.py)}
-\begin{lstlisting}[language=Python]
-ax.scatter([1.0], [0.0], color="black", zorder=6)
-ax.text(1.0 + 0.15, 0.0 + 0.15, "Start (1.00,0.00)", fontsize=9, color="black")
+\frametitle{C Code (code.c)}
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+#include <math.h>
 
-# Axes and formatting
-ax.axhline(0, color="k", linewidth=0.5)
-ax.axvline(0, color="k", linewidth=0.5)
-lim = n + 1
-ax.set_xlim(-lim, lim)
-ax.set_ylim(-lim, lim)
-ax.set_xlabel("x (cm)")
-ax.set_ylabel("y (cm)")
-ax.legend()
-plt.show()
+void particle_endpoints(int n, double *px, double *py, double *theta_out) {
+    double theta = 0.0;
+    for (int k = 1; k <= n; ++k) {
+        double r = (double)k;
+        // Arc length on C_k = k ⇒ Δθ = 1 rad
+        double delta = 1.0;
+        theta += delta;
+        px[k-1] = r * cos(theta);
+        py[k-1] = r * sin(theta);
+        if (theta_out != NULL) theta_out[k-1] = theta;
+    }
+}
 \end{lstlisting}

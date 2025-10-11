@@ -79,13 +79,13 @@ starts at $\brak{1,0}$. If the particle crosses the positive direction of the $X
 
 We model a rotation by an angle $\theta$ using the rotation matrix
 \begin{align}
-    R(\theta) &= \myvec{\cos\theta & -\sin\theta \\[6pt] \sin\theta & \cos\theta}
+    \vec{R}\brak{\theta} &= \myvec{\cos\theta & -\sin\theta \\[6pt] \sin\theta & \cos\theta}
 \end{align}
 
 Note the group property of rotations:
 \begin{align}
-    R(\theta_1)\,R(\theta_2) &= R(\theta_1+\theta_2),
-    \qquad R(\theta)^k = R(k\theta).
+    \vec{R}\brak{\theta_1}\,\vec{R}\brak{\theta_2} &= \vec{R}\brak{\theta_1+\theta_2},
+    \qquad \vec{R}\brak{\theta}^k = \vec{R}\brak{k\theta}.
 \end{align}
 
 On the circle $C_k$ the particle moves an arc of length $k$ on a circle of radius $k$, 
@@ -97,15 +97,15 @@ so the angular increment on $C_k$ is
 Thus each circular motion rotates the particle by $1$ radian.  We track the position of the particle at the instant it finishes its motion on $C_k$ (that is, after the arc motion but before the radial jump to $C_{k+1}$).  
 Starting at $\vec{p}_0$ on $C_1$, after finishing $C_1$ the position is
 \begin{align}
-    \vec{P}_1 &= 1\;R(1)\,\vec{p}_0.
+    \vec{P}_1 &= 1\;\vec{R}\brak{1}\,\vec{p}_0.
 \end{align}
-Then the particle moves radially to $C_2$, scaling the radius from $1$ to $2$, so just before moving on $C_2$ the vector is $2R(1)\vec{p}_0$. After moving on $C_2$ (an additional rotation by $1$) the particle is at
+Then the particle moves radially to $C_2$, scaling the radius from $1$ to $2$, so just before moving on $C_2$ the vector is $2\vec{R}(1)\vec{p}_0$. After moving on $C_2$ (an additional rotation by $1$) the particle is at
 \begin{align}
-    \vec{P}_2 &= 2\;R(1)R(1)\,\vec{p}_0 \;=\; 2\;R(2)\,\vec{p}_0.
+    \vec{P}_2 &= 2\;\vec{R}(1)\vec{R}(1)\,\vec{p}_0 \;=\; 2\;\vec{R}(2)\,\vec{p}_0.
 \end{align}
 By induction, after finishing its motion on $C_k$ the particle is at
 \begin{align}
-    \vec{P}_k &= k\;R(k)\,\vec{p}_0.
+    \vec{P}_k &= k\;\vec{R}(k)\,\vec{p}_0.
 \end{align}
 
 Therefore the angular coordinate of the particle after completing $C_k$ is exactly $k$ radians.
