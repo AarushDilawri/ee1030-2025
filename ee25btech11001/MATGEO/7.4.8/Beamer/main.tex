@@ -1,0 +1,343 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{txfonts}
+\usepackage{tkz-euclide}
+\usepackage{listings}
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{gvv}
+\usepackage{lmodern}
+\usepackage{circuitikz}
+\usepackage{tikz}
+\usepackage{graphicx}
+
+\setbeamertemplate{page number in head/foot}[totalframenumber]
+
+\title{7.4.8}
+\date{\today}
+\author{EE25BTECH11001 - Aarush Dilawri}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Question}
+\textbf{Question}:\\
+For each natural number $k$, let $C_k$ denote the circle with radius $k$ centimetres and
+centre at the origin. On the circle $C_k$ , a particle moves $k$ centimetres in the counter-
+clockwise direction. After completing its motion on $C_k$ , the particle moves to $C_{k+1}$ in the radial direction. The motion of the particle continues in this manner. The particle
+starts at $\brak{1,0}$. If the particle crosses the positive direction of the $X$ axis for the first time on the Circle $C_n$, then $n$ = \_
+\end{frame}
+
+\begin{frame}{Solution}
+\textbf{Solution:} \\
+\begin{align}
+    \text{Let }\; \vec{p}_0 &= \myvec{1 \\ 0} 
+\end{align}
+
+We model a rotation by an angle $\theta$ using the rotation matrix
+\begin{align}
+    R(\theta) &= \myvec{\cos\theta & -\sin\theta \\[6pt] \sin\theta & \cos\theta}
+\end{align}
+
+Note the group property of rotations:
+\begin{align}
+    R(\theta_1)\,R(\theta_2) &= R(\theta_1+\theta_2),
+    \qquad R(\theta)^k = R(k\theta).
+\end{align}
+\end{frame}
+
+\begin{frame}{Solution}
+On the circle $C_k$ the particle moves an arc of length $k$ on a circle of radius $k$, 
+so the angular increment on $C_k$ is
+\begin{align}
+    \Delta\theta_k &= \frac{\text{arc length}}{\text{radius}} \;=\; \frac{k}{k} \;=\; 1 \quad\text{(radian).}
+\end{align}
+
+Thus each circular motion rotates the particle by $1$ radian.  We track the position of the particle at the instant it finishes its motion on $C_k$ (that is, after the arc motion but before the radial jump to $C_{k+1}$).  
+\end{frame}
+
+\begin{frame}{Solution}
+Starting at $\vec{p}_0$ on $C_1$, after finishing $C_1$ the position is
+\begin{align}
+    \vec{P}_1 &= 1\;R(1)\,\vec{p}_0.
+\end{align}
+Then the particle moves radially to $C_2$, scaling the radius from $1$ to $2$, so just before moving on $C_2$ the vector is $2R(1)\vec{p}_0$. After moving on $C_2$ (an additional rotation by $1$) the particle is at
+\begin{align}
+    \vec{P}_2 &= 2\;R(1)R(1)\,\vec{p}_0 \;=\; 2\;R(2)\,\vec{p}_0.
+\end{align}
+By induction, after finishing its motion on $C_k$ the particle is at
+\begin{align}
+    \vec{P}_k &= k\;R(k)\,\vec{p}_0.
+\end{align}
+\end{frame}
+
+\begin{frame}{Solution}
+Therefore the angular coordinate of the particle after completing $C_k$ is exactly $k$ radians.
+The motion on $C_n$ runs the angle from $(n-1)$ to $n$ (radians).  
+Hence the particle crosses the positive $x$-axis during the motion on $C_n$ precisely when some integer multiple of $2\pi$ lies in the interval $(n-1,n]$, i.e. when there exists $m\in\mathbb{N}$ such that
+\begin{align}
+    n-1 \;<\; 2\pi m \;\le\; n .
+\end{align}
+\end{frame}
+
+\begin{frame}{Solution}
+We look for the smallest natural number $n$ for which this happens.  
+Take $m=1$ (the first positive multiple of $2\pi$). Compute
+\begin{align}
+    2\pi &\approx 6.283185307\ldots
+\end{align}
+and observe
+\begin{align}
+    6 \;<\; 2\pi \;\le\; 7.
+\end{align}
+Thus $2\pi$ lies in the interval $(6,7]$, so the condition holds for $n=7$ (with $m=1$).  
+For any $n\le 6$ the interval $(n-1,n]$ is contained in $[0,6]$ and cannot contain $2\pi\approx 6.283\ldots$.
+
+Therefore the particle crosses the positive $x$-axis for the first time while moving on $C_n$ with
+\begin{align}
+    \boxed{n \;=\; 7.}
+\end{align}
+\end{frame}
+
+\begin{frame}{Graphical Representation}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[height=0.5\textheight, keepaspectratio]{figs/fig.png}
+    \label{figure_1}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]{C Code (code.c)}
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+#include <math.h>
+
+void particle_endpoints(int n, double *px, double *py, double *theta_out) {
+    double theta = 0.0;
+    for (int k = 1; k <= n; ++k) {
+        double r = (double)k;
+        // Arc length on C_k = k ⇒ Δθ = 1 rad
+        double delta = 1.0;
+        theta += delta;
+        px[k-1] = r * cos(theta);
+        py[k-1] = r * sin(theta);
+        if (theta_out != NULL) theta_out[k-1] = theta;
+    }
+}
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Code (code.py)}
+\begin{lstlisting}[language=Python]
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ---- Parameters ---------------------------------------------------------
+n = 7
+arc_samples = 120
+radial_samples = 30
+
+# ---- Compute endpoints and angles ---------------------------------------
+px, py, thetas = np.zeros(n), np.zeros(n), np.zeros(n)
+theta = 0.0
+for k in range(1, n + 1):
+    theta += 1.0  # 1 rad per circle
+    px[k - 1] = k * np.cos(theta)
+    py[k - 1] = k * np.sin(theta)
+    thetas[k - 1] = theta
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Code (code.py)}
+\begin{lstlisting}[language=Python]
+path_x, path_y = [], []
+theta_prev = 0.0
+r_prev = 1.0
+path_x.append(r_prev * np.cos(theta_prev))
+path_y.append(r_prev * np.sin(theta_prev))
+
+for k in range(1, n + 1):
+    theta_curr = float(thetas[k - 1])
+    r_curr = float(k)
+
+    if k == 1:
+        # Arc on C1
+        angles = np.linspace(theta_prev, theta_curr, arc_samples + 1)[1:]
+        for ang in angles:
+            path_x.append(r_curr * np.cos(ang))
+            path_y.append(r_curr * np.sin(ang))
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Python Code (code.py)}
+\begin{lstlisting}[language=Python]
+    else:
+        # Radial outward
+        radii = np.linspace(r_prev, r_curr, radial_samples + 1)[1:]
+        for rad in radii:
+            path_x.append(rad * np.cos(theta_prev))
+            path_y.append(rad * np.sin(theta_prev))
+
+        # Arc on C_k
+        angles = np.linspace(theta_prev, theta_curr, arc_samples + 1)[1:]
+        for ang in angles:
+            path_x.append(r_curr * np.cos(ang))
+            path_y.append(r_curr * np.sin(ang))
+
+    theta_prev, r_prev = theta_curr, r_curr
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Python Code (code.py)}
+\begin{lstlisting}[language=Python]
+fig, ax = plt.subplots(figsize=(7, 7))
+ax.set_aspect("equal")
+ax.set_title("Particle trajectory (pure Python)")
+
+# Circles
+theta_full = np.linspace(0, 2 * np.pi, 400)
+for k in range(1, n + 1):
+    ax.plot(k * np.cos(theta_full), k * np.sin(theta_full),
+            linestyle="--", color="gray", linewidth=0.6)
+
+# Trajectory
+ax.plot(path_x, path_y, color="red", linewidth=1.3, label="trajectory")
+
+# Points P₁..P₇ with coordinates
+ax.scatter(px, py, color="blue", zorder=5)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Python Code (code.py)}
+\begin{lstlisting}[language=Python]
+for i in range(n):
+    label = f"P{i+1} ({px[i]:.2f},{py[i]:.2f})"
+    ax.text(px[i] + 0.15, py[i] + 0.15, label, fontsize=9, color="blue")
+ax.scatter([1.0], [0.0], color="black", zorder=6)
+ax.text(1.0 + 0.15, 0.0 + 0.15, "Start (1.00,0.00)", fontsize=9, color="black")
+ax.axhline(0, color="k", linewidth=0.5)
+ax.axvline(0, color="k", linewidth=0.5)
+lim = n + 1
+ax.set_xlim(-lim, lim)
+ax.set_ylim(-lim, lim)
+ax.set_xlabel("x (cm)")
+ax.set_ylabel("y (cm)")
+ax.legend()
+plt.show()
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+import ctypes
+import numpy as np
+import matplotlib.pyplot as plt
+lib = ctypes.CDLL("./code.so")
+lib.particle_endpoints.argtypes = [
+    ctypes.c_int,
+    np.ctypeslib.ndpointer(dtype=np.double, ndim=1, flags="C_CONTIGUOUS"),
+    np.ctypeslib.ndpointer(dtype=np.double, ndim=1, flags="C_CONTIGUOUS"),
+    np.ctypeslib.ndpointer(dtype=np.double, ndim=1, flags="C_CONTIGUOUS")
+]
+lib.particle_endpoints.restype = None
+n = 7
+arc_samples = 120
+radial_samples = 30
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+px = np.zeros(n, dtype=np.double)
+py = np.zeros(n, dtype=np.double)
+thetas = np.zeros(n, dtype=np.double)
+lib.particle_endpoints(n, px, py, thetas)
+
+# ---- Build continuous trajectory ----------------------------------------
+path_x, path_y = [], []
+theta_prev = 0.0
+r_prev = 1.0
+path_x.append(r_prev * np.cos(theta_prev))
+path_y.append(r_prev * np.sin(theta_prev))
+
+for k in range(1, n + 1):
+    theta_curr = float(thetas[k - 1])
+    r_curr = float(k)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+    if k == 1:
+        # Only arc on C1
+        angles = np.linspace(theta_prev, theta_curr, arc_samples + 1)[1:]
+        for ang in angles:
+            path_x.append(r_curr * np.cos(ang))
+            path_y.append(r_curr * np.sin(ang))
+    else:
+        # Radial outward line
+        radii = np.linspace(r_prev, r_curr, radial_samples + 1)[1:]
+        for rad in radii:
+            path_x.append(rad * np.cos(theta_prev))
+            path_y.append(rad * np.sin(theta_prev))
+
+        # Arc motion on C_k
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+        angles = np.linspace(theta_prev, theta_curr, arc_samples + 1)[1:]
+        for ang in angles:
+            path_x.append(r_curr * np.cos(ang))
+            path_y.append(r_curr * np.sin(ang))
+
+    theta_prev, r_prev = theta_curr, r_curr
+
+# ---- Plotting -----------------------------------------------------------
+fig, ax = plt.subplots(figsize=(7, 7))
+ax.set_aspect("equal")
+ax.set_title("Particle trajectory (up to P₇)")
+
+# Draw circles C₁..C₇
+theta_full = np.linspace(0, 2 * np.pi, 400)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+for k in range(1, n + 1):
+    cx = k * np.cos(theta_full)
+    cy = k * np.sin(theta_full)
+    ax.plot(cx, cy, linestyle="--", color="gray", linewidth=0.6)
+
+# Plot trajectory
+ax.plot(path_x, path_y, color="red", linewidth=1.3, label="trajectory")
+
+# Points P₁..P₇ with coordinates
+ax.scatter(px, py, color="blue", zorder=5)
+for i in range(n):
+    label = f"P{i+1} ({px[i]:.2f},{py[i]:.2f})"
+    ax.text(px[i] + 0.15, py[i] + 0.15, label, fontsize=9, color="blue")
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+ax.scatter([1.0], [0.0], color="black", zorder=6)
+ax.text(1.0 + 0.15, 0.0 + 0.15, "Start (1.00,0.00)", fontsize=9, color="black")
+
+# Axes and formatting
+ax.axhline(0, color="k", linewidth=0.5)
+ax.axvline(0, color="k", linewidth=0.5)
+lim = n + 1
+ax.set_xlim(-lim, lim)
+ax.set_ylim(-lim, lim)
+ax.set_xlabel("x (cm)")
+ax.set_ylabel("y (cm)")
+ax.legend()
+plt.show()
+\end{lstlisting}
+\end{frame}
+
+\end{document}

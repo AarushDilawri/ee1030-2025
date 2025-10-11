@@ -1,0 +1,16 @@
+\frametitle{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+ax.scatter([1.0], [0.0], color="black", zorder=6)
+ax.text(1.0 + 0.15, 0.0 + 0.15, "Start (1.00,0.00)", fontsize=9, color="black")
+
+# Axes and formatting
+ax.axhline(0, color="k", linewidth=0.5)
+ax.axvline(0, color="k", linewidth=0.5)
+lim = n + 1
+ax.set_xlim(-lim, lim)
+ax.set_ylim(-lim, lim)
+ax.set_xlabel("x (cm)")
+ax.set_ylabel("y (cm)")
+ax.legend()
+plt.show()
+\end{lstlisting}

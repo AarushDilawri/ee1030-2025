@@ -1,0 +1,141 @@
+\let\negmedspace\undefined
+\let\negthickspace\undefined
+\documentclass[journal]{IEEEtran}
+\usepackage[a5paper, margin=10mm, onecolumn]{geometry}
+%\usepackage{lmodern} % Ensure lmodern is loaded for pdflatex
+\usepackage{tfrupee} % Include tfrupee package
+
+\setlength{\headheight}{1cm} % Set the height of the header box
+\setlength{\headsep}{0mm}     % Set the distance between the header box and the top of the text
+
+\usepackage{gvv-book}
+\usepackage{gvv}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{txfonts}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{gensymb}
+\usepackage{comment}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{tkz-euclide} 
+\usepackage{listings}
+% \usepackage{gvv}                                        
+\def\inputGnumericTable{}                                 
+\usepackage[latin1]{inputenc}                                
+\usepackage{color}                                            
+\usepackage{array}                                            
+\usepackage{longtable}                                       
+\usepackage{calc}                                             
+\usepackage{multirow}                                         
+\usepackage{hhline}                                           
+\usepackage{ifthen}                                           
+\usepackage{lscape}
+\usepackage{circuitikz}
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=4em, text centered, rounded corners, minimum height=3em]
+\tikzstyle{sum} = [draw, fill=blue!10, circle, minimum size=1cm, node distance=1.5cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+
+
+\begin{document}
+
+\bibliographystyle{IEEEtran}
+\vspace{3cm}
+
+\title{7.4.8}
+\author{EE25BTECH11001 - Aarush Dilawri}
+\maketitle
+% \newpage
+% \bigskip
+{\let\newpage\relax\maketitle}
+
+\renewcommand{\thefigure}{\theenumi}
+\renewcommand{\thetable}{\theenumi}
+\setlength{\intextsep}{10pt} % Space between text and floats
+
+
+\numberwithin{equation}{enumi}
+\numberwithin{figure}{enumi}
+\renewcommand{\thetable}{\theenumi}
+
+\textbf{Question}:\\
+For each natural number $k$, let $C_k$ denote the circle with radius $k$ centimetres and
+centre at the origin. On the circle $C_k$ , a particle moves $k$ centimetres in the counter-
+clockwise direction. After completing its motion on $C_k$ , the particle moves to $C_{k+1}$ in the radial direction. The motion of the particle continues in this manner. The particle
+starts at $\brak{1,0}$. If the particle crosses the positive direction of the $X$ axis for the first time on the Circle $C_n$, then $n$ = \_
+
+\solution \\
+
+\begin{align}
+    \text{Let }\; \vec{p}_0 &= \myvec{1 \\ 0} 
+\end{align}
+
+We model a rotation by an angle $\theta$ using the rotation matrix
+\begin{align}
+    R(\theta) &= \myvec{\cos\theta & -\sin\theta \\[6pt] \sin\theta & \cos\theta}
+\end{align}
+
+Note the group property of rotations:
+\begin{align}
+    R(\theta_1)\,R(\theta_2) &= R(\theta_1+\theta_2),
+    \qquad R(\theta)^k = R(k\theta).
+\end{align}
+
+On the circle $C_k$ the particle moves an arc of length $k$ on a circle of radius $k$, 
+so the angular increment on $C_k$ is
+\begin{align}
+    \Delta\theta_k &= \frac{\text{arc length}}{\text{radius}} \;=\; \frac{k}{k} \;=\; 1 \quad\text{(radian).}
+\end{align}
+
+Thus each circular motion rotates the particle by $1$ radian.  We track the position of the particle at the instant it finishes its motion on $C_k$ (that is, after the arc motion but before the radial jump to $C_{k+1}$).  
+Starting at $\vec{p}_0$ on $C_1$, after finishing $C_1$ the position is
+\begin{align}
+    \vec{P}_1 &= 1\;R(1)\,\vec{p}_0.
+\end{align}
+Then the particle moves radially to $C_2$, scaling the radius from $1$ to $2$, so just before moving on $C_2$ the vector is $2R(1)\vec{p}_0$. After moving on $C_2$ (an additional rotation by $1$) the particle is at
+\begin{align}
+    \vec{P}_2 &= 2\;R(1)R(1)\,\vec{p}_0 \;=\; 2\;R(2)\,\vec{p}_0.
+\end{align}
+By induction, after finishing its motion on $C_k$ the particle is at
+\begin{align}
+    \vec{P}_k &= k\;R(k)\,\vec{p}_0.
+\end{align}
+
+Therefore the angular coordinate of the particle after completing $C_k$ is exactly $k$ radians.
+The motion on $C_n$ runs the angle from $(n-1)$ to $n$ (radians).  
+Hence the particle crosses the positive $x$-axis during the motion on $C_n$ precisely when some integer multiple of $2\pi$ lies in the interval $(n-1,n]$, i.e. when there exists $m\in\mathbb{N}$ such that
+\begin{align}
+    n-1 \;<\; 2\pi m \;\le\; n .
+\end{align}
+
+We look for the smallest natural number $n$ for which this happens.  
+Take $m=1$ (the first positive multiple of $2\pi$). Compute
+\begin{align}
+    2\pi &\approx 6.283185307\ldots
+\end{align}
+and observe
+\begin{align}
+    6 \;<\; 2\pi \;\le\; 7.
+\end{align}
+Thus $2\pi$ lies in the interval $(6,7]$, so the condition holds for $n=7$ (with $m=1$).  
+For any $n\le 6$ the interval $(n-1,n]$ is contained in $[0,6]$ and cannot contain $2\pi\approx 6.283\ldots$.
+
+Therefore the particle crosses the positive $x$-axis for the first time while moving on $C_n$ with
+\begin{align}
+    \boxed{n \;=\; 7.}
+\end{align}
+
+See Figure,
+\begin{figure}[h!]
+    \centering
+    \includegraphics[height=0.5\textheight, keepaspectratio]{figs/fig.png}
+    \label{figure_1}
+\end{figure}
+\end{document}
