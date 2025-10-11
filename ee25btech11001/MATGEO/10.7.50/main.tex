@@ -1,0 +1,170 @@
+\let\negmedspace\undefined
+\let\negthickspace\undefined
+\documentclass[journal]{IEEEtran}
+\usepackage[a5paper, margin=10mm, onecolumn]{geometry}
+%\usepackage{lmodern} % Ensure lmodern is loaded for pdflatex
+\usepackage{tfrupee} % Include tfrupee package
+
+\setlength{\headheight}{1cm} % Set the height of the header box
+\setlength{\headsep}{0mm}     % Set the distance between the header box and the top of the text
+
+\usepackage{gvv-book}
+\usepackage{gvv}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{txfonts}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{gensymb}
+\usepackage{comment}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{tkz-euclide} 
+\usepackage{listings}
+% \usepackage{gvv}                                        
+\def\inputGnumericTable{}                                 
+\usepackage[latin1]{inputenc}                                
+\usepackage{color}                                            
+\usepackage{array}                                            
+\usepackage{longtable}                                       
+\usepackage{calc}                                             
+\usepackage{multirow}                                         
+\usepackage{hhline}                                           
+\usepackage{ifthen}                                           
+\usepackage{lscape}
+\begin{document}
+
+\bibliographystyle{IEEEtran}
+\vspace{3cm}
+
+\title{10.7.50}
+\author{EE25BTECH11001 - Aarush Dilawri}
+% \maketitle
+% \newpage
+% \bigskip
+{\let\newpage\relax\maketitle}
+
+\renewcommand{\thefigure}{\theenumi}
+\renewcommand{\thetable}{\theenumi}
+\setlength{\intextsep}{10pt} % Space between text and floats
+\textbf{Question}:\\
+Consider the family of circles $x^2 + y^2 = r^2 , 2 < r < 5$. If in the first quadrant, the
+common tangent to a circle of this family and the ellipse $4x^2 + 25y^2 = 100$ meets
+the coordinate axes at $\vec{A}$ and $\vec{B}$, then find the equation of the locus of the midpoint of $AB$.
+
+\textbf{Solution:} \\
+\begin{align}
+\text{The family of circles is } 
+\vec{X}^\top\vec{X} = r^2,\qquad 2<r<5,
+\end{align}
+\begin{align}
+\text{and the ellipse is } 
+\vec{X}^\top\vec{V}\vec{X} = 100,\quad
+\vec{V} = \myvec{4 & 0 \\ 0 & 25}.
+\end{align}
+
+Let the common tangent meet the coordinate axes at 
+\begin{align}
+\vec{A} = a\vec{e}_1,\qquad \vec{B} = b\vec{e}_2,
+\qquad a,b>0.
+\end{align}
+
+The equation of the line passing through $\vec{A} \text{ and } \vec{B}$ can be written as 
+\begin{align}
+\frac{\vec{e}_1^\top\vec{X}}{a}+\frac{\vec{e}_2^\top\vec{X}}{b}=1.
+\end{align}
+
+This is of the form  $\vec{n}^\top\vec{X}=c$, with 
+\begin{align}
+\vec{n} = \myvec{\dfrac{1}{a}\\[6pt]\dfrac{1}{b}},
+\quad c=1.
+\end{align}
+
+Let the midpoint of $\vec{A} \text{ and } \vec{B}$ be 
+\begin{align}
+\vec{m} = \frac{\vec{A}+\vec{B}}{2}.
+\end{align}
+
+From this,
+\begin{align}
+a = 2\,\vec{e}_1^\top\vec{m},\quad
+b = 2\,\vec{e}_2^\top\vec{m}.
+\end{align}
+
+\begin{align*}
+\text{For the line } \vec{n}^\top\vec{X}=c \text{ to be tangent to } 
+\vec{X}^\top\vec{V}\vec{X}=100,\text{ the condition is } 
+c^2 = 100\,\vec{n}^\top\vec{V}^{-1}\vec{n}.
+\end{align*}
+
+\begin{align}
+\text{Here } c=1,\quad
+\vec{V}^{-1}=\myvec{\tfrac{1}{4} & 0 \\ 0 & \tfrac{1}{25}}.
+\text{ Substituting gives }
+1 = 100\Big(\frac{1}{4a^2}+\frac{1}{25b^2}\Big).
+\end{align}
+
+\begin{align}
+\Rightarrow \frac{25}{a^2}+\frac{4}{b^2}=1.
+\end{align}
+
+
+Also, for the line $\vec{n}^\top\vec{X}=c$ to be tangent to the circle $\vec{X}^\top\vec{X}=r^2$,\\ 
+the distance from the origin must equal $r$.
+\begin{align}
+    \frac{|c|}{\|\vec{n}\|}=r.\\
+    \text{With } c=1 \text{ this gives } \|\vec{n}\|^2 = \frac{1}{r^2}.
+    \text{ So }
+    \frac{1}{a^2}+\frac{1}{b^2}=\frac{1}{r^2}.
+\end{align}
+
+We now express the ellipse tangency condition in terms of $\vec{m}$.\\
+Substitute $a=2\vec{e}_1^\top\vec{m},\; b=2\vec{e}_2^\top\vec{m}:$
+\begin{align}
+\frac{25}{4\brak{\vec{e}_1^\top\vec{m}}^2}+\frac{4}{4\brak{\vec{e}_2^\top\vec{m}}^2}=1.
+\end{align}
+
+
+\begin{align}
+\implies \brak{4\brak{\vec{e}_1^\top\vec{m}}^2-25}\,\brak{\vec{e}_2^\top\vec{m}}^2
+=4\brak{\vec{e}_1^\top\vec{m}}^2.
+\end{align}
+
+\begin{align}
+\text{Or equivalently, }
+4\brak{\vec{e}_1^\top\vec{m}}^2\brak{\vec{e}_2^\top\vec{m}}^2
+-4\brak{\vec{e}_1^\top\vec{m}}^2
+-25\brak{\vec{e}_2^\top\vec{m}}^2
+=0.
+\end{align}
+
+\begin{align}
+\text{Finally, let } 
+\vec{m}=\myvec{x\\[4pt] y},
+\quad \vec{e}_1^\top\vec{m}=x,\quad \vec{e}_2^\top\vec{m}=y.
+\end{align}
+
+\begin{align}
+\text{Substituting gives the locus equation }
+4x^2y^2 - 4x^2 - 25y^2 = 0.
+\end{align}
+
+\begin{align}
+\text{Required locus: } 4x^2y^2 - 4x^2 - 25y^2 = 0.
+\end{align}
+
+
+\newpage
+See Fig. 0 ,
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.6\columnwidth]{figs/fig.png}
+\end{center}
+\caption{}
+\label{fig:Fig1}
+\end{figure}
+\end{document}
