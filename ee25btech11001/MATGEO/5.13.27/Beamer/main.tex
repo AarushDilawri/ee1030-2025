@@ -1,0 +1,130 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{txfonts}
+\usepackage{tkz-euclide}
+\usepackage{listings}
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{gvv}
+\usepackage{lmodern}
+\usepackage{circuitikz}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{enumitem}
+
+\setbeamertemplate{page number in head/foot}[totalframenumber]
+
+\title{5.13.27}
+\date{\today}
+\author{EE25BTECH11001 - Aarush Dilawri}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Matrix Commutation Problem}
+\textbf{Question:} Let $\vec{A}=\myvec{1 & 2 \\ 3 & 4}$ and $\vec{B} = \myvec{a & 0 \\ 0 & b}, a,b \in \mathbb{N}$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item there cannot exist any $\vec{B}$ such that $\vec{A}\vec{B} = \vec{B}\vec{A}$
+    \item there exist more than one but finite number of $\vec{B}$ such that $\vec{A}\vec{B} = \vec{B}\vec{A}$
+    \item there exists exactly one $\vec{B}$ such that $\vec{A}\vec{B} = \vec{B}\vec{A}$
+    \item there exist infinitely many $\vec{B}$ such that $\vec{A}\vec{B} = \vec{B}\vec{A}$
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Solution}
+\textbf{Solution:} \\
+\begin{align}
+\text{Let } \vec{A} &= \myvec{1 & 2 \\ 3 & 4}, \quad 
+\vec{B} = \myvec{a & 0 \\ 0 & b}, \quad a,b \in \mathbb{N}.
+\end{align}
+We compute $\vec{A}\vec{B}$:
+\begin{align}
+\vec{A}\vec{B} 
+&= \myvec{1 & 2 \\ 3 & 4} \myvec{a & 0 \\ 0 & b} \\[6pt]
+&= \myvec{a & 2b \\ 3a & 4b}.
+\end{align}    
+\end{frame}
+\begin{frame}{Solution}
+Similarly, compute $\vec{B}\vec{A}$:
+\begin{align}
+\vec{B}\vec{A} 
+&= \myvec{a & 0 \\ 0 & b} \myvec{1 & 2 \\ 3 & 4} \\[6pt]
+&= \myvec{a & 2a \\ 3b & 4b}.
+\end{align}    
+\end{frame}
+\begin{frame}{Solution}
+For $\vec{A}\vec{B} = \vec{B}\vec{A}$, we must have:
+\begin{align}
+\myvec{a & 2b \\ 3a & 4b} = \myvec{a & 2a \\ 3b & 4b}.
+\end{align}
+Equating the corresponding entries gives:
+\begin{align}
+2b &= 2a \quad \implies \quad b = a, \\[6pt]
+3a &= 3b \quad \implies \quad a = b.
+\end{align}    
+\end{frame}
+\begin{frame}{Solution}
+Hence, 
+\begin{align}
+\vec{B} = \myvec{a & 0 \\ 0 & a} = a\vec{I}.
+\end{align}
+Since $a \in \mathbb{N}$, there are infinitely many such $\vec{B}$.\\
+Therefore, the answer is (d) there exist infinitely many $\vec{B}$ such that $\vec{AB} = \vec{BA}$.    
+\end{frame}
+\begin{frame}[fragile]{C Code (code.c)}
+\begin{lstlisting}[language=C]
+#int countCommutingMatrices(int n, int *A, int maxVal) {
+    // if any off-diagonal entry of A is non-zero, infinite solutions (a=b)
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            if (i != j && A[i*n + j] != 0)
+                return -1;
+
+    // otherwise finite: count diagonal Bs with a=b
+    return maxVal;
+}
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Python Code (code.py)}
+\begin{lstlisting}[language=Python]
+def count_commuting(A, n, maxVal):
+    for i in range(n):
+        for j in range(n):
+            if i != j and A[i][j] != 0:
+                return -1
+    return maxVal
+
+A = [[1, 2],
+     [3, 4]]
+n = 2
+maxVal = 5
+
+res = count_commuting(A, n, maxVal)
+print("Number of commuting matrices B = ∞ (infinite)" if res == -1 else f"Number of B = {res}")
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]{Python Code (nativecode.py)}
+\begin{lstlisting}[language=Python]
+import ctypes
+
+lib = ctypes.CDLL("./code.so")
+lib.countCommutingMatrices.argtypes = [ctypes.c_int, ctypes.POINTER(ctypes.c_int), ctypes.c_int]
+lib.countCommutingMatrices.restype = ctypes.c_int
+
+n = 2
+A = [1, 2, 3, 4]
+maxVal = 5
+A_c = (ctypes.c_int * (n*n))(*A)
+
+res = lib.countCommutingMatrices(n, A_c, maxVal)
+print("Number of commuting matrices B = ∞ (infinite)" if res == -1 else f"Number of B = {res}")
+\end{lstlisting}
+\end{frame}
+\end{document}

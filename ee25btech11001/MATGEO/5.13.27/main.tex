@@ -1,0 +1,118 @@
+\let\negmedspace\undefined
+\let\negthickspace\undefined
+\documentclass[journal]{IEEEtran}
+\usepackage[a5paper, margin=10mm, onecolumn]{geometry}
+%\usepackage{lmodern} % Ensure lmodern is loaded for pdflatex
+\usepackage{tfrupee} % Include tfrupee package
+
+\setlength{\headheight}{1cm} % Set the height of the header box
+\setlength{\headsep}{0mm}     % Set the distance between the header box and the top of the text
+
+\usepackage{gvv-book}
+\usepackage{gvv}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{txfonts}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{gensymb}
+\usepackage{comment}
+\usepackage{multicol}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{tkz-euclide} 
+\usepackage{listings}
+% \usepackage{gvv}                                        
+\def\inputGnumericTable{}                                 
+\usepackage[latin1]{inputenc}                                
+\usepackage{color}                                            
+\usepackage{array}                                            
+\usepackage{longtable}                                       
+\usepackage{calc}                                             
+\usepackage{multirow}                                         
+\usepackage{hhline}                                           
+\usepackage{ifthen}                                           
+\usepackage{lscape}
+\usepackage{circuitikz}
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=4em, text centered, rounded corners, minimum height=3em]
+\tikzstyle{sum} = [draw, fill=blue!10, circle, minimum size=1cm, node distance=1.5cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+
+
+\begin{document}
+
+\bibliographystyle{IEEEtran}
+\vspace{3cm}
+
+\title{5.13.27}
+\author{EE25BTECH11001 - Aarush Dilawri}
+\maketitle
+% \newpage
+% \bigskip
+{\let\newpage\relax\maketitle}
+
+\renewcommand{\thefigure}{\theenumi}
+\renewcommand{\thetable}{\theenumi}
+\setlength{\intextsep}{10pt} % Space between text and floats
+
+
+\numberwithin{equation}{enumi}
+\numberwithin{figure}{enumi}
+\renewcommand{\thetable}{\theenumi}
+
+\textbf{Question:} Let $\vec{A}=\myvec{1 & 2 \\ 3 & 4}$ and $\vec{B} = \myvec{a & 0 \\ 0 & b}, a,b \in \mathbb{N}$.
+
+
+\begin{enumerate}[label=(\alph*)]
+    \item there cannot exist any $\vec{B}$ such that $\vec{A}\vec{B} = \vec{B}\vec{A}$
+    \item there exist more than one but finite number of $\vec{B}$ such that $\vec{A}\vec{B} = \vec{B}\vec{A}$
+    \item there exists exactly one $\vec{B}$ such that $\vec{A}\vec{B} = \vec{B}\vec{A}$
+    \item there exist infinitely many $\vec{B}$ such that $\vec{A}\vec{B} = \vec{B}\vec{A}$
+\end{enumerate}
+
+
+\solution \\
+\begin{align}
+\text{Let } \vec{A} &= \myvec{1 & 2 \\ 3 & 4}, \quad 
+\vec{B} = \myvec{a & 0 \\ 0 & b}, \quad a,b \in \mathbb{N}.
+\end{align}
+
+We compute $\vec{A}\vec{B}$:
+\begin{align}
+\vec{A}\vec{B} 
+&= \myvec{1 & 2 \\ 3 & 4} \myvec{a & 0 \\ 0 & b} \\[6pt]
+&= \myvec{a & 2b \\ 3a & 4b}.
+\end{align}
+
+Similarly, compute $\vec{B}\vec{A}$:
+\begin{align}
+\vec{B}\vec{A} 
+&= \myvec{a & 0 \\ 0 & b} \myvec{1 & 2 \\ 3 & 4} \\[6pt]
+&= \myvec{a & 2a \\ 3b & 4b}.
+\end{align}
+
+For $\vec{A}\vec{B} = \vec{B}\vec{A}$, we must have:
+\begin{align}
+\myvec{a & 2b \\ 3a & 4b} = \myvec{a & 2a \\ 3b & 4b}.
+\end{align}
+
+Equating the corresponding entries gives:
+\begin{align}
+2b &= 2a \quad \implies \quad b = a, \\[6pt]
+3a &= 3b \quad \implies \quad a = b.
+\end{align}
+
+Hence, 
+\begin{align}
+\vec{B} = \myvec{a & 0 \\ 0 & a} = a\vec{I}.
+\end{align}
+
+Since $a \in \mathbb{N}$, there are infinitely many such $\vec{B}$.\\
+Therefore, the answer is (d) there exist infinitely many $\vec{B}$ such that $\vec{AB} = \vec{BA}$.
+\end{document}
