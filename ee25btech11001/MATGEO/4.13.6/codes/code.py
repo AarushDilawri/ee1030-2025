@@ -35,9 +35,23 @@ for i in range(X.shape[0]):
         P = np.array([X[i,j], Y[i,j]])
         Z[i,j] = locus_value(A, B, P, D)
 
+# Plot the locus
 plt.contour(X, Y, Z, levels=[0], colors="red")
+
+# Plot the foci points A and B
+plt.scatter(A[0], A[1], color="blue", label="A (focus)")
+plt.scatter(B[0], B[1], color="green", label="B (focus)")
+
+# Coordinate axes
 plt.axhline(0, color="k", linewidth=0.5)
 plt.axvline(0, color="k", linewidth=0.5)
+
+# Make the plot pretty
 plt.gca().set_aspect("equal")
-plt.title("Locus")
+plt.legend()
+plt.title("Locus of P such that |AP − BP| = 6")
+plt.xlabel("x")
+plt.ylabel("y")
+
 plt.show()
+
