@@ -1,4 +1,3 @@
-# code.py
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -16,17 +15,23 @@ n_norm = n / np.linalg.norm(n)
 p1 = center + r * n_norm
 p2 = center - r * n_norm
 
-# Plot circle
-theta = np.linspace(0, 2*np.pi, 200)
+# Circle plotting
+theta = np.linspace(0, 2*np.pi, 400)
 x = center[0] + r * np.cos(theta)
 y = center[1] + r * np.sin(theta)
 
 plt.figure()
 plt.plot(x, y, 'b', label='Circle')
 plt.scatter([p1[0], p2[0]], [p1[1], p2[1]], color='r', label='Points of contact')
+
+# Tangent lines at x = p1[0], x = p2[0]
+y_min, y_max = min(y), max(y)
+plt.plot([p1[0], p1[0]], [y_min, y_max], 'g--', label='Tangent')
+plt.plot([p2[0], p2[0]], [y_min, y_max], 'g--')
+
 plt.gca().set_aspect('equal')
 plt.legend()
 plt.grid(True)
-plt.title('Circle and Points of Contact')
+plt.title('Circle, Points of Contact & Tangents')
 plt.show()
 
