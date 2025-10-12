@@ -78,10 +78,79 @@ b = 2\,\vec{e}_2^\top\vec{m}.
 \end{align}
 \end{frame}
 
+\begin{frame}{Solution}
+The ellipse is
+\begin{align}
+\vec{x}^\top \vec{V}\vec{x} = 100.
+\end{align}
+
+The line is
+\begin{align}
+\vec{n}^\top \vec{x} = c.
+\end{align}
+
+Suppose $\vec{x}_0 = \alpha \vec{n}$ is a solution.  
+Then
+\begin{align}
+\vec{n}^\top \vec{x}_0 = \alpha \vec{n}^\top \vec{n} = c
+\implies \alpha = \frac{c}{\vec{n}^\top \vec{n}}.
+\end{align}
+\end{frame}
+
+\begin{frame}{Solution}
+So a particular solution is
+\begin{align}
+\vec{x}_0 = \frac{c}{\vec{n}^\top \vec{n}} \vec{n}.
+\end{align}
+
+Any point on the line can be written as
+\begin{align}
+\vec{x} = \vec{x}_0 + \mu \vec{m},
+\end{align}
+where $\vec{m}$ is a direction vector satisfying
+\begin{align}
+\vec{n}^\top \vec{m} = 0.
+\end{align}
+
+Substitute into $\vec{x}^\top \vec{V}\vec{x} = 100$:
+\begin{align}
+\brak{\vec{x}_0 + \mu \vec{m}}^\top \vec{V} \brak{\vec{x}_0 + \mu \vec{m}} = 100.
+\end{align}
+\end{frame}
+
+\begin{frame}{Solution}
+Expanding,
+\begin{align}
+\vec{x}_0^\top \vec{V}\vec{x}_0
++ 2\mu \vec{m}^\top \vec{V}\vec{x}_0
++ \mu^2 \vec{m}^\top \vec{V}\vec{m} = 100.
+\end{align}
+
+This is a quadratic in $\mu$
+
+For tangency, discriminant $=0$:
+That is,
+\begin{align}
+\brak{2\vec{m}^\top \vec{V}\vec{x}_0}^2
+- 4\brak{\vec{m}^\top \vec{V}\vec{m}}
+\brak{\vec{x}_0^\top \vec{V}\vec{x}_0 - 100} = 0.
+\end{align}
+\end{frame}
+\begin{frame}{Solution}
+After simplification using
+\begin{align}
+\vec{x}_0 = \frac{c}{\vec{n}^\top \vec{n}} \vec{n}, \qquad 
+\vec{n}^\top \vec{m} = 0,
+\end{align}
+the condition reduces to
+\begin{align}
+c^2 = 100 \,\vec{n}^\top \vec{V}^{-1}\vec{n}.
+\end{align}
+\end{frame}
 % ------------------ Next Slide ------------------
 \begin{frame}{Solution}
 \begin{align*}
-\text{For the line } \vec{n}^\top\vec{X}=c \text{ to be tangent to } \\
+\therefore\text{For the line } \vec{n}^\top\vec{X}=c \text{ to be tangent to } \\
 \vec{X}^\top\vec{V}\vec{X}=100,\text{ the condition is } 
 c^2 = 100\,\vec{n}^\top\vec{V}^{-1}\vec{n}.
 \end{align*}
@@ -164,4 +233,5 @@ Substitute $a=2\vec{e}_1^\top\vec{m},\; b=2\vec{e}_2^\top\vec{m}:$
 \url{https://github.com/AarushDilawri/ee1030-2025/tree/main/ee25btech11001/MATGEO/10.7.50/codes}
 \end{frame}
 \end{document}
+
 
