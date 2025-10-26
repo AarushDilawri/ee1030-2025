@@ -1,0 +1,13 @@
+\frametitle{Python Code 2}
+    \begin{lstlisting}
+plt.scatter([x1, x_img], [y1, y_img], c=['r','b'])
+plt.text(x1, y1, 'P(1,2)', fontsize=12)
+plt.text(x_img, y_img, "P'", fontsize=12)
+plt.plot([x1, x_img], [y1, y_img], 'g--', label='Perpendicular')
+
+plt.axis('equal')
+plt.grid(True)
+plt.title("Reflection of Point (1,2) in Line x - 3y + 4 = 0")
+plt.savefig("../figs/plot.png")
+plt.show()
+    \end{lstlisting}

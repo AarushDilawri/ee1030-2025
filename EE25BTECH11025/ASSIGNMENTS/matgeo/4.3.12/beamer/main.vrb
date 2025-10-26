@@ -1,0 +1,11 @@
+\frametitle{Python Code 2}
+    \begin{lstlisting}
+plt.axhline(y=0, color='k', linewidth=1.5)
+plt.title("Plot of the given line and points")
+plt.xlabel("X-axis")
+plt.ylabel("Y-axis")
+plt.axis('equal')
+plt.grid(True)
+plt.savefig("../figs/plot.png")
+plt.show()
+    \end{lstlisting}

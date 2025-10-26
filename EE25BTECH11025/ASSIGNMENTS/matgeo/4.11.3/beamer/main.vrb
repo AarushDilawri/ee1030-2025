@@ -1,0 +1,10 @@
+\frametitle{Python Code 2}
+    \begin{lstlisting}
+ax.scatter(*Q2, color='green', s=40, label='Q2 (plane)')
+ax.scatter(*Q3, color='green', s=40, label='Q3 (plane)')
+ax.scatter(*X,  color='black', s=70, label='Intersection')
+
+ax.set_xlabel('X'); ax.set_ylabel('Y'); ax.set_zlabel('Z')
+ax.legend()
+plt.savefig("../figs/plot.png")
+plt.show()   \end{lstlisting}
